@@ -490,122 +490,6 @@
             text-align: center;
         }
 
-        /* Dynamic Dropdown Management Styles */
-        .dropdown-manager {
-            background: #f8f9fa;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .dropdown-manager h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-        
-        .dropdown-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .dropdown-input {
-            flex: 1;
-            min-width: 200px;
-            padding: 10px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-        
-        .dropdown-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        .add-option-btn {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-        
-        .add-option-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
-        }
-        
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
-        .option-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: white;
-            border: 1px solid #e1e5e9;
-            border-radius: 6px;
-            padding: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .option-item:hover {
-            background: #f0f2f5;
-        }
-        
-        .option-text {
-            flex: 1;
-            font-size: 0.95rem;
-            color: #333;
-        }
-        
-        .option-actions {
-            display: flex;
-            gap: 5px;
-        }
-        
-        .edit-btn, .delete-btn {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-        
-        .edit-btn {
-            background: #ffc107;
-            color: #333;
-        }
-        
-        .edit-btn:hover {
-            background: #e0a800;
-        }
-        
-        .delete-btn {
-            background: #dc3545;
-            color: white;
-        }
-        
-        .delete-btn:hover {
-            background: #c82333;
-        }
-
         /* File upload styles */
         .file-input-wrapper {
             position: relative;
@@ -929,35 +813,11 @@ Room Codes (Room- Codes)
                         Enter room codes with their associated codes. Use the format shown above. Each line can contain a room code followed by its associated codes, or just individual codes.
                     </div>
                 </div>
-                <!-- Dynamic Dropdown Management Section -->
-                <div id="dropdownManager" class="dropdown-manager" style="display: none;">
-                    <h3>Manage Status Options</h3>
-                    <p style="color: #666; margin-bottom: 15px; font-size: 0.95rem;">
-                        Add, edit, or remove status options that will appear in the inspection dropdown menus.
-                    </p>
-                    
-                    <div class="dropdown-controls">
-                        <input 
-                            type="text" 
-                            id="newOptionInput" 
-                            class="dropdown-input" 
-                            placeholder="Enter new status option..."
-                            maxlength="50"
-                        >
-                        <button id="addOptionBtn" class="add-option-btn">Add Option</button>
-                    </div>
-                    
-                    <div class="options-list" id="optionsList">
-                        <!-- Options will be dynamically populated here -->
-                    </div>
-                </div>
-
                 <div class="action-buttons">
                     <button id="startCodeInspection" class="button">Start Inspection</button>
                     <button id="loadSavedCodeData" class="button secondary">Load Saved Data</button>
                     <button id="exportCodeJsonData" class="button secondary">Download Data (JSON)</button>
                     <button id="importCodeJsonData" class="button secondary">Upload Data (JSON)</button>
-                    <button id="manageStatusBtn" class="button secondary">Manage Status Options</button>
                     <button id="resetCodeApp" class="button danger">Reset Application</button>
                     <button id="backToMainMenuFromCode" class="button secondary">Back to Menu</button>
                 </div>
@@ -1167,28 +1027,25 @@ Room Codes (Room- Codes)
             currentCodeRoomIndex: 0, // Index for rooms in code inspection
             checkData: {}, // Format: { 'roomName' or 'room-code': statusIndex (for code) or value (for site) }
             codeSpecificComments: {}, // Format: { 'room-code': 'comment' }
-            isInspectionMode: false,
-            statusOptions: [] // Dynamic status options for code inspection
+            isInspectionMode: false
         };
 
-        // Dynamic status options for code inspection - now stored in appState
-        function getDefaultStatusOptions() {
-            return [
-                'Available',
-                'No Access',
-                'Protective Covering',
-                'Installed',
-                'PIA Required',
-                'TCO',
-                'CBS blocking Installation',
-                'Equipment Blocking Install',
-                'Not Verified',
-                'Material Blocking',
-                'Not Installed',
-                'Material Blocking Plate',
-                'Unavailable'
-            ];
-        }
+        // Pre-loadable status options for code inspection
+        const codeStatusOptions = [
+            'Available',
+            'No Access',
+            'Protective Covering',
+            'Installed',
+            'PIA Required',
+            'TCO',
+            'CBS blocking  Installation ',
+            'Equipment Blocking Install',
+            'Not Verified ',
+            'Material Blocking',
+            'Not Installed',
+            'Material Blocking Plate',
+            'Unavailable '
+        ];
 
         // Check questions/labels for site inspection (from original PDF)
         const groupedCheckLabels = [
@@ -1235,18 +1092,8 @@ Room Codes (Room- Codes)
         // Initialize the application
         function initApp() {
             loadDataFromStorage(); // Load appState from localStorage
-            initializeStatusOptions(); // Initialize status options if empty
             setupEventListeners(); // Set up all event listeners
             refreshUIFromState(); // Refresh UI based on loaded state
-            renderStatusOptions(); // Render status options in dropdown manager
-        }
-
-        // Initialize status options with default values if empty
-        function initializeStatusOptions() {
-            if (!appState.statusOptions || appState.statusOptions.length === 0) {
-                appState.statusOptions = getDefaultStatusOptions();
-                saveDataToStorage();
-            }
         }
 
         // Set up all event listeners
@@ -1278,11 +1125,6 @@ Room Codes (Room- Codes)
             });
 
             // Code input page buttons
-            document.getElementById('manageStatusBtn').addEventListener('click', toggleDropdownManager);
-            document.getElementById('addOptionBtn').addEventListener('click', addNewStatusOption);
-            document.getElementById('newOptionInput').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') addNewStatusOption();
-            });
             document.getElementById('startCodeInspection').addEventListener('click', startCodeInspection);
             document.getElementById('loadSavedCodeData').addEventListener('click', loadSavedData);
             document.getElementById('exportCodeJsonData').addEventListener('click', downloadJsonData);
@@ -1815,7 +1657,7 @@ Room Codes (Room- Codes)
                 const statusOptionsDiv = document.createElement('div');
                 statusOptionsDiv.className = 'status-options';
                 statusOptionsDiv.dataset.codeId = uniqueCodeId;
-                appState.statusOptions.forEach((option, optionIndex) => {
+                codeStatusOptions.forEach((option, optionIndex) => {
                     const optionDiv = document.createElement('div');
                     optionDiv.className = 'status-option';
                     optionDiv.textContent = option;
@@ -2025,8 +1867,8 @@ Room Codes (Room- Codes)
                 const commentTextarea = document.querySelector(`.comment-textarea[data-code-id="${uniqueCodeId}"]`);
 
                 if (statusButton) {
-                    if (selectedStatusIndex !== null && selectedStatusIndex < appState.statusOptions.length) {
-                        statusButton.textContent = appState.statusOptions[selectedStatusIndex];
+                    if (selectedStatusIndex !== null) {
+                        statusButton.textContent = codeStatusOptions[selectedStatusIndex];
                         statusButton.classList.add('selected');
                     } else {
                         statusButton.textContent = 'Select Status';
@@ -2347,7 +2189,7 @@ Room Codes (Room- Codes)
                     appState.roomCodes[roomName].forEach(code => {
                         const uniqueCodeId = `${roomName}-${code}`;
                         const statusIndex = appState.checkData[uniqueCodeId];
-                        const statusText = statusIndex !== null && statusIndex < appState.statusOptions.length ? appState.statusOptions[statusIndex] : 'Not Inspected';
+                        const statusText = statusIndex !== null ? codeStatusOptions[statusIndex] : 'Not Inspected';
                         const commentText = appState.codeSpecificComments[uniqueCodeId] || '';
                         
                         const rowData = [roomName, code, statusText, commentText];
@@ -2398,126 +2240,14 @@ Room Codes (Room- Codes)
                 currentCodeRoomIndex: 0,
                 checkData: {},
                 codeSpecificComments: {},
-                isInspectionMode: false,
-                statusOptions: getDefaultStatusOptions()
+                isInspectionMode: false
             };
             // Clear the text areas when resetting the application
             roomListTextarea.value = '';
             codeListTextarea.value = '';
             roomNumbersTextarea.value = '';
-            renderStatusOptions();
             hideResetModal();
             showMainMenuPage();
-        }
-
-        // Dynamic Dropdown Management Functions
-        function toggleDropdownManager() {
-            const dropdownManager = document.getElementById('dropdownManager');
-            const manageBtn = document.getElementById('manageStatusBtn');
-            
-            if (dropdownManager.style.display === 'none') {
-                dropdownManager.style.display = 'block';
-                manageBtn.textContent = 'Hide Status Options';
-                renderStatusOptions();
-            } else {
-                dropdownManager.style.display = 'none';
-                manageBtn.textContent = 'Manage Status Options';
-            }
-        }
-
-        function renderStatusOptions() {
-            const optionsList = document.getElementById('optionsList');
-            if (!optionsList) return;
-            
-            optionsList.innerHTML = '';
-
-            if (appState.statusOptions.length === 0) {
-                optionsList.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">No status options available. Add some options to get started.</p>';
-                return;
-            }
-
-            appState.statusOptions.forEach((option, index) => {
-                const optionItem = document.createElement('div');
-                optionItem.className = 'option-item';
-                optionItem.innerHTML = `
-                    <span class="option-text">${escapeHtml(option)}</span>
-                    <div class="option-actions">
-                        <button class="edit-btn" onclick="editStatusOption(${index})">Edit</button>
-                        <button class="delete-btn" onclick="deleteStatusOption(${index})">Delete</button>
-                    </div>
-                `;
-                optionsList.appendChild(optionItem);
-            });
-        }
-
-        function addNewStatusOption() {
-            const input = document.getElementById('newOptionInput');
-            const newOption = input.value.trim();
-
-            if (!newOption) {
-                showMessageModal('Input Required', 'Please enter a status option.');
-                return;
-            }
-
-            if (appState.statusOptions.includes(newOption)) {
-                showMessageModal('Duplicate Option', 'This status option already exists.');
-                return;
-            }
-
-            if (newOption.length > 50) {
-                showMessageModal('Option Too Long', 'Status options must be 50 characters or less.');
-                return;
-            }
-
-            appState.statusOptions.push(newOption);
-            input.value = '';
-            saveDataToStorage();
-            renderStatusOptions();
-            showMessageModal('Option Added', `"${newOption}" has been added to the status options.`);
-        }
-
-        function editStatusOption(index) {
-            const currentOption = appState.statusOptions[index];
-            const newOption = prompt('Edit status option:', currentOption);
-
-            if (newOption === null) return; // User cancelled
-
-            const trimmedOption = newOption.trim();
-            if (!trimmedOption) {
-                showMessageModal('Invalid Input', 'Status option cannot be empty.');
-                return;
-            }
-
-            if (trimmedOption.length > 50) {
-                showMessageModal('Option Too Long', 'Status options must be 50 characters or less.');
-                return;
-            }
-
-            if (trimmedOption !== currentOption && appState.statusOptions.includes(trimmedOption)) {
-                showMessageModal('Duplicate Option', 'This status option already exists.');
-                return;
-            }
-
-            appState.statusOptions[index] = trimmedOption;
-            saveDataToStorage();
-            renderStatusOptions();
-            showMessageModal('Option Updated', `Status option has been updated to "${trimmedOption}".`);
-        }
-
-        function deleteStatusOption(index) {
-            const optionToDelete = appState.statusOptions[index];
-            if (confirm(`Are you sure you want to delete "${optionToDelete}"? This action cannot be undone.`)) {
-                appState.statusOptions.splice(index, 1);
-                saveDataToStorage();
-                renderStatusOptions();
-                showMessageModal('Option Deleted', `"${optionToDelete}" has been removed from the status options.`);
-            }
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
         }
 
         // Storage functions
@@ -2540,4 +2270,3 @@ Room Codes (Room- Codes)
 
 </body>
 </html>
-
