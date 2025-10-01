@@ -181,6 +181,30 @@
         }
         
         /* Sequential Check Page Styles */
+
+        /* Room status color coding */
+        .room-select.no-access {
+            background-color: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
+        }
+        
+        .room-select.completed {
+            background-color: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+        
+        .room-select.no-access:focus {
+            border-color: #f44336;
+            box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
+        }
+        
+        .room-select.completed:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+        
         .room-header {
             text-align: center;
             margin-bottom: 30px;
@@ -284,6 +308,114 @@
         }
 
         /* Code Check Page Styles */
+
+        /* Room status buttons */
+        .room-status-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .status-btn {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-btn.no-access {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+        }
+        
+        .status-btn.no-access:hover {
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+        }
+        
+        .status-btn.completed {
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+            color: white;
+        }
+        
+        .status-btn.completed:hover {
+            background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        
+        /* SE/ST/SV specific styles */
+        .se-st-sv-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e1e5e9;
+        }
+        
+        .entries-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .entry-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+        }
+        
+        .entry-label {
+            font-weight: 600;
+            color: #333;
+            min-width: 30px;
+            flex-shrink: 0;
+        }
+        
+        .entry-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            font-size: 1rem;
+            min-width: 0; /* Allow input to shrink on small screens */
+        }
+        
+        .entry-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+        
+        .remove-entry-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+        
+        .remove-entry-btn:hover {
+            background: #c82333;
+        }
+        
         .code-header {
             text-align: center;
             margin-bottom: 30px;
