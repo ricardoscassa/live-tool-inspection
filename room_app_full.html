@@ -1189,7 +1189,7 @@ Room Codes (Room- Codes)
                     </div>
                     <div class="room-status-buttons">
                         <button id="noAccessBtn" class="status-btn no-access">No Access</button>
-                        <button id="completedBtn" class="status-btn completed">Completed Room</button>
+                        <button id="completedBtn" class="status-btn completed">Acess</button>
                     </div>
                     <div id="progressInfo" class="progress-info">Room 1 of 5</div>
                     <div class="progress-bar">
@@ -1223,7 +1223,7 @@ Room Codes (Room- Codes)
                     </div>
                     <div class="room-status-buttons">
                         <button id="codeNoAccessBtn" class="status-btn no-access">No Access</button>
-                        <button id="codeCompletedBtn" class="status-btn completed">Completed Room</button>
+                        <button id="codeCompletedBtn" class="status-btn completed">Access</button>
                     </div>
                     <div id="codeProgressInfo" class="progress-info">Room 1 of 5</div>
                     <div class="progress-bar">
@@ -1288,7 +1288,7 @@ Room Codes (Room- Codes)
                     </div>
                     <div class="room-status-buttons">
                         <button id="seStSvNoAccessBtn" class="status-btn no-access">No Access</button>
-                        <button id="seStSvCompletedBtn" class="status-btn completed">Completed Room</button>
+                        <button id="seStSvCompletedBtn" class="status-btn completed">Access</button>
                     </div>
                     <div id="seStSvProgressInfo" class="progress-info">Room 1 of 3</div>
                     <div class="progress-bar">
@@ -2704,7 +2704,7 @@ Room Codes (Room- Codes)
                 appState.rooms.forEach(room => {
                     const roomData = appState.checkData[room] || new Array(checkLabels.length).fill(null);
                     const rowData = [room, ...roomData.map(value => {
-                        if (value === null) return '0';
+                        if (value === null) return ' ';
                         if (typeof value === 'string') return value; // Comments are strings
                         return value === 1 ? '1' : '0'; // Yes/No checks
                     })];
