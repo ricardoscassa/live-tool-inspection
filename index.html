@@ -194,6 +194,274 @@
             margin-bottom: 10px;
         }
 
+        /* Enhanced Custom Dropdown Styles with Visual Indicators */
+        .custom-dropdown {
+            position: relative;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .custom-dropdown-button {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: white;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+
+        .custom-dropdown-button:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .custom-dropdown-button:hover {
+            border-color: #667eea;
+        }
+
+        .custom-dropdown-arrow {
+            transition: transform 0.3s ease;
+            font-size: 12px;
+            color: #667eea;
+        }
+
+        .custom-dropdown-button.open .custom-dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .custom-dropdown-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .custom-dropdown-options.show {
+            display: block;
+        }
+
+        .custom-dropdown-option {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .custom-dropdown-option:last-child {
+            border-bottom: none;
+        }
+
+        .custom-dropdown-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .custom-dropdown-option.selected {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            font-weight: 500;
+        }
+
+        /* Visual Status Indicators for Dropdown Options */
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 2px solid transparent;
+        }
+
+        .status-indicator.completed {
+            background-color: #4caf50;
+            border-color: #2e7d32;
+        }
+
+        .status-indicator.no-access {
+            background-color: #f44336;
+            border-color: #c62828;
+        }
+
+        .status-indicator.default {
+            background-color: #e0e0e0;
+            border-color: #bdbdbd;
+        }
+
+        /* Alternative: Use checkmark and X symbols */
+        .status-symbol {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .status-symbol.completed {
+            color: #4caf50;
+        }
+
+        .status-symbol.completed::before {
+            content: "✓";
+        }
+
+        .status-symbol.no-access {
+            color: #f44336;
+        }
+
+        .status-symbol.no-access::before {
+            content: "✗";
+        }
+
+        .status-symbol.default {
+            color: #bdbdbd;
+        }
+
+        .status-symbol.default::before {
+            content: "○";
+        }
+
+        /* Custom dropdown status color coding for button */
+        .custom-dropdown-button.no-access {
+            background-color: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
+        }
+
+        .custom-dropdown-button.completed {
+            background-color: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .custom-dropdown-button.no-access:focus {
+            border-color: #f44336;
+            box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
+        }
+
+        .custom-dropdown-button.completed:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .custom-dropdown-button {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: white;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+
+        .custom-dropdown-button:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .custom-dropdown-button:hover {
+            border-color: #667eea;
+        }
+
+        .custom-dropdown-arrow {
+            transition: transform 0.3s ease;
+            font-size: 12px;
+            color: #667eea;
+        }
+
+        .custom-dropdown-button.open .custom-dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .custom-dropdown-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .custom-dropdown-options.show {
+            display: block;
+        }
+
+        .custom-dropdown-option {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease;
+        }
+
+        .custom-dropdown-option:last-child {
+            border-bottom: none;
+        }
+
+        .custom-dropdown-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .custom-dropdown-option.selected {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            font-weight: 500;
+        }
+
+        /* Custom dropdown status color coding */
+        .custom-dropdown-button.no-access {
+            background-color: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
+        }
+
+        .custom-dropdown-button.completed {
+            background-color: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .custom-dropdown-button.no-access:focus {
+            border-color: #f44336;
+            box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
+        }
+
+        .custom-dropdown-button.completed:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
         .room-select {
             width: 100%;
             padding: 10px;
@@ -216,6 +484,29 @@
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Room status color coding */
+        .room-select.no-access {
+            background-color: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
+        }
+
+        .room-select.completed {
+            background-color: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .room-select.no-access:focus {
+            border-color: #f44336;
+            box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
+        }
+
+        .room-select.completed:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
         }
 
         .checks-grid {
@@ -426,6 +717,49 @@
             font-family: inherit;
             resize: vertical;
             box-sizing: border-box;
+        }
+
+        /* Room status buttons */
+        .room-status-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .status-btn {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-btn.no-access {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+        }
+
+        .status-btn.no-access:hover {
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+        }
+
+        .status-btn.completed {
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+            color: white;
+        }
+
+        .status-btn.completed:hover {
+            background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
         }
 
         .navigation {
@@ -671,6 +1005,23 @@
                 padding: 8px;
             }
 
+            /* Enhanced mobile dropdown styling */
+            .custom-dropdown-option {
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+
+            .status-indicator {
+                width: 14px;
+                height: 14px;
+            }
+
+            .status-symbol {
+                width: 18px;
+                height: 18px;
+                font-size: 14px;
+            }
+
             /* SE/ST/SV mobile improvements */
             .se-st-sv-section {
                 padding: 15px;
@@ -730,6 +1081,141 @@
             .remove-entry-btn {
                 padding: 8px 16px;
                 font-size: 0.9rem;
+            }
+        }
+
+        /* Floating and Docking Button Styles - iOS Optimized */
+        .floating-buttons {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1001;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            -webkit-transform: translateX(-50%) translateZ(0);
+            -webkit-backface-visibility: hidden;
+            -webkit-perspective: 1000;
+        }
+
+        .floating-buttons.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateX(-50%) translateY(10px);
+            -webkit-transform: translateX(-50%) translateY(10px) translateZ(0);
+        }
+
+        .floating-buttons.docked {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            transform: none;
+            -webkit-transform: none;
+            z-index: auto;
+        }
+
+        .floating-buttons .status-btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .floating-buttons .status-btn:active {
+            transform: scale(0.95);
+            -webkit-transform: scale(0.95) translateZ(0);
+        }
+
+        .floating-buttons .status-btn.no-access {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+        }
+
+        .floating-buttons .status-btn.no-access:hover,
+        .floating-buttons .status-btn.no-access:active {
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            box-shadow: 0 6px 25px rgba(244, 67, 54, 0.4);
+        }
+
+        .floating-buttons .status-btn.completed {
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+            color: white;
+        }
+
+        .floating-buttons .status-btn.completed:hover,
+        .floating-buttons .status-btn.completed:active {
+            background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+            box-shadow: 0 6px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .room-status-buttons.floating-active {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .room-status-buttons.docked-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            .floating-buttons {
+                bottom: calc(20px + env(safe-area-inset-bottom));
+            }
+            
+            .floating-buttons .status-btn {
+                -webkit-appearance: none;
+                border-radius: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-buttons {
+                bottom: 15px;
+                gap: 8px;
+                padding: 0 10px;
+                width: calc(100% - 20px);
+                max-width: 400px;
+            }
+            
+            .floating-buttons .status-btn {
+                min-width: auto;
+                padding: 14px 16px;
+                font-size: 0.85rem;
+                border-radius: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .floating-buttons {
+                bottom: 10px;
+                gap: 6px;
+                padding: 0 8px;
+            }
+            
+            .floating-buttons .status-btn {
+                padding: 12px 14px;
+                font-size: 0.8rem;
+                min-width: 120px;
             }
         }
     </style>
@@ -829,7 +1315,17 @@ Room Codes (Room- Codes)
             <div class="card">
                 <div class="room-header">
                     <h2 id="currentRoomTitle" class="room-title">Room 101</h2>
-                    <select id="roomSelect" class="room-select"></select>
+                    <div id="roomSelect" class="custom-dropdown">
+                        <button class="custom-dropdown-button" type="button">
+                            <span class="custom-dropdown-text">Select Room</span>
+                            <span class="custom-dropdown-arrow">▼</span>
+                        </button>
+                        <div class="custom-dropdown-options"></div>
+                    </div>
+                    <div class="room-status-buttons">
+                        <button id="noAccessBtn" class="status-btn no-access">No Access</button>
+                        <button id="completedBtn" class="status-btn completed">Completed Room</button>
+                    </div>
                     <div id="progressInfo" class="progress-info">Room 1 of 5</div>
                     <div class="progress-bar">
                         <div id="progressFill" class="progress-fill" style="width: 20%"></div>
@@ -853,7 +1349,17 @@ Room Codes (Room- Codes)
             <div class="card">
                 <div class="code-header">
                     <h2 id="currentCodeRoomTitle" class="code-title">Room: 1HLF0104ZL</h2>
-                    <select id="codeRoomSelect" class="room-select"></select>
+                    <div id="codeRoomSelect" class="custom-dropdown">
+                        <button class="custom-dropdown-button" type="button">
+                            <span class="custom-dropdown-text">Select Room</span>
+                            <span class="custom-dropdown-arrow">▼</span>
+                        </button>
+                        <div class="custom-dropdown-options"></div>
+                    </div>
+                    <div class="room-status-buttons">
+                        <button id="codeNoAccessBtn" class="status-btn no-access">No Access</button>
+                        <button id="codeCompletedBtn" class="status-btn completed">Completed Room</button>
+                    </div>
                     <div id="codeProgressInfo" class="progress-info">Room 1 of 5</div>
                     <div class="progress-bar">
                         <div id="codeProgressFill" class="progress-fill" style="width: 20%"></div>
@@ -908,7 +1414,17 @@ Room Codes (Room- Codes)
             <div class="card">
                 <div class="room-header">
                     <h2 id="currentSeStSvRoomTitle" class="room-title">Room: 1ABC0172BA</h2>
-                    <select id="seStSvRoomSelect" class="room-select"></select>
+                    <div id="seStSvRoomSelect" class="custom-dropdown">
+                        <button class="custom-dropdown-button" type="button">
+                            <span class="custom-dropdown-text">Select Room</span>
+                            <span class="custom-dropdown-arrow">▼</span>
+                        </button>
+                        <div class="custom-dropdown-options"></div>
+                    </div>
+                    <div class="room-status-buttons">
+                        <button id="seStSvNoAccessBtn" class="status-btn no-access">No Access</button>
+                        <button id="seStSvCompletedBtn" class="status-btn completed">Completed Room</button>
+                    </div>
                     <div id="seStSvProgressInfo" class="progress-info">Room 1 of 3</div>
                     <div class="progress-bar">
                         <div id="seStSvProgressFill" class="progress-fill" style="width: 33%"></div>
@@ -925,8 +1441,10 @@ Room Codes (Room- Codes)
                     <!-- ST Section -->
                     <div class="se-st-sv-section">
                         <h3 style="color: #333; margin-bottom: 15px;">ST</h3>
-                        <textarea class="entry-textarea" id="stTextarea" placeholder="Enter ST codes, one per line, when inserting clamps use like this:
-1111-2 (4 digits code - qty of clamps)">     
+                        <textarea class="entry-textarea" id="stTextarea" placeholder="Enter ST codes, one per line. You can use:
+- Short codes with clamps: 1111-2 (4 digits code - qty of clamps)
+- Whole room numbers: 1ABC01ST0123 (complete room number)
+- Whole room numbers with clamps: 1ABC01ST0123-2 (complete room number - qty of clamps)">     
                         </textarea>
                     </div>
 
@@ -941,7 +1459,6 @@ Room Codes (Room- Codes)
                     <button id="prevSeStSvRoom" class="button nav-button secondary">Previous Room</button>
                     <button id="nextSeStSvRoom" class="button nav-button">Next Room</button>
                 </div>
-
                 <div class="action-buttons">
                     <button id="exportSeStSvCsv" class="button success">Export to CSV</button>
                     <button id="backToSeStSvInput" class="button secondary">Back to Input</button>
@@ -954,12 +1471,12 @@ Room Codes (Room- Codes)
             <div class="card">
                 <div class="success-message">
                     <h2>Inspection Complete!</h2>
-                    <p>All items have been inspected successfully.</p>
+                    <p>All rooms have been inspected successfully.</p>
                 </div>
                 <div class="action-buttons">
                     <button id="exportExcelComplete" class="button success">Export to CSV</button>
-                    <button id="continueEditingComplete" class="button primary">Continue Editing</button>
-                    <button id="backToMainMenuComplete" class="button secondary">Back to Main Menu</button>
+                    <button id="continueEditingComplete" class="button secondary">Continue Editing</button>
+                    <button id="backToMainMenuComplete" class="button secondary">Back to Menu</button>
                 </div>
             </div>
         </div>
@@ -968,9 +1485,9 @@ Room Codes (Room- Codes)
         <div id="resetModal" class="modal">
             <div class="modal-content">
                 <h3>Reset Application</h3>
-                <p>This will permanently delete all saved data and inspection results. Are you sure?</p>
+                <p>Are you sure you want to reset all data? This action cannot be undone.</p>
                 <div class="modal-buttons">
-                    <button id="confirmReset" class="button danger">Yes, Reset</button>
+                    <button id="confirmReset" class="button danger">Reset</button>
                     <button id="cancelReset" class="button secondary">Cancel</button>
                 </div>
             </div>
@@ -980,16 +1497,15 @@ Room Codes (Room- Codes)
         <div id="fileUploadModal" class="modal">
             <div class="modal-content">
                 <h3>Upload JSON Data</h3>
-                <p>Select a JSON file to import your inspection data:</p>
                 <div class="file-input-wrapper">
-                    <input type="file" id="jsonFileInput" class="file-input" accept=".json" />
+                    <input type="file" id="jsonFileInput" class="file-input" accept=".json">
                     <label for="jsonFileInput" class="file-input-label">
                         Choose JSON File or Drag & Drop
                     </label>
                     <div id="fileName" class="file-name"></div>
                 </div>
                 <div class="modal-buttons">
-                    <button id="uploadJsonFile" class="button primary">Upload Data</button>
+                    <button id="uploadJsonFile" class="button" disabled>Upload</button>
                     <button id="cancelFileUpload" class="button secondary">Cancel</button>
                 </div>
             </div>
@@ -1027,6 +1543,7 @@ Room Codes (Room- Codes)
             currentCodeRoomIndex: 0, // Index for rooms in code inspection
             checkData: {}, // Format: { 'roomName' or 'room-code': statusIndex (for code) or value (for site) }
             codeSpecificComments: {}, // Format: { 'room-code': 'comment' }
+            roomStatus: {}, // Format: { 'roomName': 'status' } where status is 'no-access', 'completed', or null
             isInspectionMode: false
         };
 
@@ -1089,6 +1606,14 @@ Room Codes (Room- Codes)
         const messageModalContent = document.getElementById('messageModalContent');
         const closeMessageModalButton = document.getElementById('closeMessageModal');
 
+        // Helper function to check if a string matches the whole room number pattern
+        function isWholeRoomNumber(entry) {
+            // Pattern: digit + letters + digits + "ST" + digits (optionally followed by "-" and digits for clamps)
+            // More flexible pattern to handle various formats like 1HPB0NST1234
+            const wholeRoomPattern = /^\d[A-Z0-9]*\d{4}(-\d+)?$/;
+            return wholeRoomPattern.test(entry);
+        }
+
         // Initialize the application
         function initApp() {
             loadDataFromStorage(); // Load appState from localStorage
@@ -1149,7 +1674,6 @@ Room Codes (Room- Codes)
             });
 
             // SE/ST/SV check page buttons
-
             document.getElementById('exportSeStSvCsv').addEventListener('click', exportSeStSvToCsv);
             document.getElementById('backToSeStSvInput').addEventListener('click', () => showRoomSeStSvInputPage());
 
@@ -1160,6 +1684,7 @@ Room Codes (Room- Codes)
                     saveDataToStorage();
                     updateSeStSvPage();
                     generateSeStSvEntries();
+                    window.scrollTo(0, 0);
                 }
             });
 
@@ -1169,6 +1694,7 @@ Room Codes (Room- Codes)
                     saveDataToStorage();
                     updateSeStSvPage();
                     generateSeStSvEntries();
+                    window.scrollTo(0, 0);
                 }
             });
 
@@ -1237,8 +1763,10 @@ Room Codes (Room- Codes)
             document.getElementById('exportExcelComplete').addEventListener('click', () => {
                 if (appState.mode === 'site') {
                     exportToCsv();
-                } else {
+                } else if (appState.mode === 'code') {
                     exportCodeToCsv();
+                } else if (appState.mode === 'seststv') {
+                    exportSeStSvToCsv();
                 }
             });
             document.getElementById('backToMainMenuComplete').addEventListener('click', () => {
@@ -1254,17 +1782,53 @@ Room Codes (Room- Codes)
                     showCheckPage();
                     updateCheckPage();
                     updateCheckStates();
-                } else {
+                } else if (appState.mode === 'code') {
                     generateCodeCheckItems();
                     showCodeCheckPage();
                     updateCodeCheckPage();
                     updateCodeCheckStates();
+                } else if (appState.mode === 'seststv') {
+                    showRoomSeStSvCheckPage();
+                    updateSeStSvPage();
+                    generateSeStSvEntries();
                 }
             });
 
-            // Room select dropdown
-            roomSelect.addEventListener('change', handleRoomSelectChange);
-            codeRoomSelect.addEventListener('change', handleCodeRoomSelectChange);
+            // Initialize custom dropdowns
+            initCustomDropdown('roomSelect', (index) => {
+                appState.currentRoomIndex = index;
+                saveDataToStorage();
+                updateCheckPage();
+                generateCheckItems();
+                updateCheckStates();
+            });
+            
+            initCustomDropdown('codeRoomSelect', (index) => {
+                appState.currentCodeRoomIndex = index;
+                saveDataToStorage();
+                generateCodeCheckItems();
+                updateCodeCheckPage();
+                updateCodeCheckStates();
+            });
+            
+            initCustomDropdown('seStSvRoomSelect', (index) => {
+                appState.currentSeStSvRoomIndex = index;
+                saveDataToStorage();
+                showRoomSeStSvCheckPage();
+                updateSeStSvPage();
+                generateSeStSvEntries();
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', closeAllDropdowns);
+
+            // Room status buttons
+            document.getElementById('noAccessBtn').addEventListener('click', () => setRoomStatus('no-access'));
+            document.getElementById('completedBtn').addEventListener('click', () => setRoomStatus('completed'));
+            document.getElementById('codeNoAccessBtn').addEventListener('click', () => setCodeRoomStatus('no-access'));
+            document.getElementById('codeCompletedBtn').addEventListener('click', () => setCodeRoomStatus('completed'));
+            document.getElementById('seStSvNoAccessBtn').addEventListener('click', () => setSeStSvRoomStatus('no-access'));
+            document.getElementById('seStSvCompletedBtn').addEventListener('click', () => setSeStSvRoomStatus('completed'));
 
             // Reset modal buttons
             document.getElementById('confirmReset').addEventListener('click', resetApplication);
@@ -1335,57 +1899,87 @@ Room Codes (Room- Codes)
 
                         if (hasSiteData || hasCodeData || hasSeStSvData) {
                             appState.isInspectionMode = true;
-                        } else {
-                            appState.isInspectionMode = false;
                         }
 
                         saveDataToStorage();
-                        hideFileUploadModal();
-                        showMessageModal("Data Imported", "Data imported successfully! The application will now refresh.");
                         refreshUIFromState();
+                        hideFileUploadModal();
+                        showMessageModal('Import Successful', 'Data imported successfully!');
                     } else {
-                        showMessageModal("Invalid Data", "The JSON file does not appear to be a valid application state.");
+                        showMessageModal('Invalid Data', 'The selected file does not contain valid inspection data.');
                     }
                 } catch (error) {
-                    console.error("Import JSON failed:", error);
-                    showMessageModal("Error Importing", "Failed to parse JSON data. Error: " + error.message);
+                    console.error('Import failed:', error);
+                    showMessageModal('Import Failed', 'Failed to import data. Please check the file format.');
                 }
             };
             reader.readAsText(file);
         }
 
-        // Download JSON data as file
-        function downloadJsonData() {
-            try {
-                const jsonString = JSON.stringify(appState, null, 2);
-                const blob = new Blob([jsonString], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                
-                const timestamp = new Date().toISOString().split('T')[0];
-                const filename = `room_inspection_data_${timestamp}.json`;
-                
-                link.href = url;
-                link.download = filename;
-                link.style.display = 'none';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(url);
-                
-                showMessageModal('Download Started', 'Your inspection data has been downloaded as a JSON file.');
-            } catch (error) {
-                console.error('Download JSON failed:', error);
-                showMessageModal('Error Downloading', 'Failed to download data. Please try again.');
-            }
+        // Show/hide functions for pages and modals
+        function showMainMenuPage() {
+            hideAllPages();
+            mainMenuPage.classList.add('active');
         }
 
-        // Modal functions
+        function showRoomInputPage() {
+            hideAllPages();
+            roomInputPage.classList.add('active');
+        }
+
+        function showCodeInputPage() {
+            hideAllPages();
+            codeInputPage.classList.add('active');
+        }
+
+        function showRoomSeStSvInputPage() {
+            hideAllPages();
+            roomSeStSvInputPage.classList.add('active');
+        }
+
+        function showCheckPage() {
+            hideAllPages();
+            checkPage.classList.add('active');
+            initFloatingButtonsForPage();
+        }
+
+        function showCodeCheckPage() {
+            hideAllPages();
+            codeCheckPage.classList.add('active');
+            initFloatingButtonsForPage();
+        }
+
+        function showRoomSeStSvCheckPage() {
+            hideAllPages();
+            roomSeStSvCheckPage.classList.add('active');
+            initFloatingButtonsForPage();
+        }
+
+        function showCompletionPage() {
+            hideAllPages();
+            completionPage.classList.add('active');
+        }
+
+        function hideAllPages() {
+            cleanupFloatingButtons();
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+        }
+
+        function showResetModal() {
+            resetModal.classList.add('active');
+        }
+
+        function hideResetModal() {
+            resetModal.classList.remove('active');
+        }
+
         function showFileUploadModal() {
-            fileName.textContent = '';
-            jsonFileInput.value = '';
-            uploadJsonFileButton.disabled = true;
             fileUploadModal.classList.add('active');
+            jsonFileInput.value = '';
+            fileName.textContent = '';
+            uploadJsonFileButton.disabled = true;
         }
 
         function hideFileUploadModal() {
@@ -1402,90 +1996,256 @@ Room Codes (Room- Codes)
             messageModal.classList.remove('active');
         }
 
-        function showResetModal() {
-            resetModal.classList.add('active');
-        }
-
-        function hideResetModal() {
-            resetModal.classList.remove('active');
-        }
-
         // Refresh UI based on current state
         function refreshUIFromState() {
             if (appState.isInspectionMode) {
-                if (appState.mode === 'site') {
-                    if (appState.rooms && appState.rooms.length > 0) {
-                        generateCheckItems();
-                        showCheckPage();
-                        updateCheckPage();
-                        updateCheckStates();
-                    } else {
-                        showRoomInputPage();
-                    }
-                } else if (appState.mode === 'code') {
-                    if (appState.roomCodes && Object.keys(appState.roomCodes).length > 0) {
-                        generateCodeCheckItems();
-                        showCodeCheckPage();
-                        updateCodeCheckPage();
-                        updateCodeCheckStates();
-                    } else {
-                        showCodeInputPage();
-                    }
-                } else if (appState.mode === 'seststv') {
-                    if (appState.seStSvRooms && appState.seStSvRooms.length > 0) {
-                        showRoomSeStSvCheckPage();
-                        updateSeStSvPage();
-                        generateSeStSvEntries();
-                    } else {
-                        showRoomSeStSvInputPage();
-                    }
+                if (appState.mode === 'site' && appState.rooms.length > 0) {
+                    generateCheckItems();
+                    showCheckPage();
+                    updateCheckPage();
+                    updateCheckStates();
+                } else if (appState.mode === 'code' && Object.keys(appState.roomCodes).length > 0) {
+                    generateCodeCheckItems();
+                    showCodeCheckPage();
+                    updateCodeCheckPage();
+                    updateCodeCheckStates();
+                } else if (appState.mode === 'seststv' && appState.seStSvRooms.length > 0) {
+                    showRoomSeStSvCheckPage();
+                    updateSeStSvPage();
+                    generateSeStSvEntries();
                 }
             } else {
-                // Always show main menu when not in inspection mode, regardless of saved mode
-                showMainMenuPage();
+                if (appState.mode === 'site') {
+                    showRoomInputPage();
+                } else if (appState.mode === 'code') {
+                    showCodeInputPage();
+                } else if (appState.mode === 'seststv') {
+                    showRoomSeStSvInputPage();
+                } else {
+                    showMainMenuPage();
+                }
             }
 
             // Update text areas with saved data
-            if (appState.rooms && appState.rooms.length > 0) {
+            if (appState.rooms.length > 0) {
                 roomListTextarea.value = appState.rooms.join('\n');
             }
-            if (appState.roomCodes && Object.keys(appState.roomCodes).length > 0) {
+            if (Object.keys(appState.roomCodes).length > 0) {
+                // Reconstruct the code list format
                 let codeText = '';
                 for (const room in appState.roomCodes) {
                     if (appState.roomCodes[room].length > 0) {
-                        codeText += room + '- ' + appState.roomCodes[room].join(' ') + '\n';
+                        codeText += `${room}- ${appState.roomCodes[room].join(' ')}\n`;
                     }
                 }
                 codeListTextarea.value = codeText.trim();
             }
-            if (appState.seStSvRooms && appState.seStSvRooms.length > 0) {
+            if (appState.seStSvRooms.length > 0) {
                 roomNumbersTextarea.value = appState.seStSvRooms.join('\n');
-            } else if (appState.roomNumber) {
-                // Legacy support - convert single room to multi-room format
-                roomNumbersTextarea.value = appState.roomNumber;
             }
         }
 
-        // Load saved data
+        // Room select change handlers
+        function handleRoomSelectChange(event) {
+            appState.currentRoomIndex = parseInt(event.target.value);
+            saveDataToStorage();
+            updateCheckPage();
+            generateCheckItems();
+            updateCheckStates();
+        }
+
+        function handleCodeRoomSelectChange(event) {
+            appState.currentCodeRoomIndex = parseInt(event.target.value);
+            saveDataToStorage();
+            generateCodeCheckItems();
+            updateCodeCheckPage();
+            updateCodeCheckStates();
+        }
+
+        // Room status functions
+        function setRoomStatus(status) {
+            const currentRoom = appState.rooms[appState.currentRoomIndex];
+            if (currentRoom) {
+                appState.roomStatus[currentRoom] = status;
+                updateRoomSelectColor();
+                saveDataToStorage();
+            }
+        }
+
+        function setCodeRoomStatus(status) {
+            const currentRoom = Object.keys(appState.roomCodes)[appState.currentCodeRoomIndex];
+            if (currentRoom) {
+                appState.roomStatus[currentRoom] = status;
+                updateCodeRoomSelectColor();
+                saveDataToStorage();
+            }
+        }
+
+        function setSeStSvRoomStatus(status) {
+            const currentRoom = appState.seStSvRooms[appState.currentSeStSvRoomIndex];
+            if (currentRoom) {
+                appState.roomStatus[currentRoom] = status;
+                updateSeStSvRoomSelectColor();
+                saveDataToStorage();
+            }
+        }
+
+        // Custom dropdown functionality
+        function initCustomDropdown(dropdownId, onSelect) {
+            const dropdown = document.getElementById(dropdownId);
+            const button = dropdown.querySelector('.custom-dropdown-button');
+            const options = dropdown.querySelector('.custom-dropdown-options');
+            const text = dropdown.querySelector('.custom-dropdown-text');
+
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeAllDropdowns();
+                options.classList.toggle('show');
+                button.classList.toggle('open');
+            });
+
+            dropdown.addEventListener('click', (e) => {
+                // Handle clicks on option or its children (status indicator + text)
+                let optionElement = e.target;
+                if (!optionElement.classList.contains('custom-dropdown-option')) {
+                    optionElement = optionElement.closest('.custom-dropdown-option');
+                }
+                
+                if (optionElement && optionElement.classList.contains('custom-dropdown-option')) {
+                    const selectedIndex = parseInt(optionElement.dataset.index);
+                    const selectedText = optionElement.querySelector('span').textContent;
+                    text.textContent = selectedText;
+                    options.classList.remove('show');
+                    button.classList.remove('open');
+                    onSelect(selectedIndex);
+                }
+            });
+
+            return { button, options, text };
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.custom-dropdown-options').forEach(options => {
+                options.classList.remove('show');
+            });
+            document.querySelectorAll('.custom-dropdown-button').forEach(button => {
+                button.classList.remove('open');
+            });
+        }
+
+        function updateCustomDropdownOptions(dropdownId, optionsArray, selectedIndex = 0) {
+            const dropdown = document.getElementById(dropdownId);
+            const options = dropdown.querySelector('.custom-dropdown-options');
+            const text = dropdown.querySelector('.custom-dropdown-text');
+            
+            options.innerHTML = '';
+            optionsArray.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'custom-dropdown-option';
+                optionDiv.dataset.index = index;
+                
+                // Create status indicator
+                const statusIndicator = document.createElement('div');
+                const roomStatus = getRoomStatus(option);
+                statusIndicator.className = 'status-symbol ' + roomStatus;
+                
+                // Add room name
+                const roomName = document.createElement('span');
+                roomName.textContent = option;
+                
+                optionDiv.appendChild(statusIndicator);
+                optionDiv.appendChild(roomName);
+                
+                if (index === selectedIndex) {
+                    optionDiv.classList.add('selected');
+                    text.textContent = option;
+                }
+                options.appendChild(optionDiv);
+            });
+        }
+
+        function getRoomStatus(roomName) {
+            if (appState.roomStatus[roomName] === 'no-access') {
+                return 'no-access';
+            } else if (appState.roomStatus[roomName] === 'completed') {
+                return 'completed';
+            } else {
+                return 'default';
+            }
+        }
+
+        function updateCustomDropdownColor(dropdownId, status) {
+            const dropdown = document.getElementById(dropdownId);
+            const button = dropdown.querySelector('.custom-dropdown-button');
+            button.className = 'custom-dropdown-button';
+            if (status === 'no-access') {
+                button.classList.add('no-access');
+            } else if (status === 'completed') {
+                button.classList.add('completed');
+            }
+        }
+
+        function updateRoomSelectColor() {
+            const currentRoom = appState.rooms[appState.currentRoomIndex];
+            if (currentRoom) {
+                const status = appState.roomStatus[currentRoom];
+                updateCustomDropdownColor('roomSelect', status);
+            }
+        }
+
+        function updateCodeRoomSelectColor() {
+            const currentRoom = Object.keys(appState.roomCodes)[appState.currentCodeRoomIndex];
+            if (currentRoom) {
+                const status = appState.roomStatus[currentRoom];
+                updateCustomDropdownColor('codeRoomSelect', status);
+            }
+        }
+
+        function updateSeStSvRoomSelectColor() {
+            const currentRoom = appState.seStSvRooms[appState.currentSeStSvRoomIndex];
+            if (currentRoom) {
+                const status = appState.roomStatus[currentRoom];
+                updateCustomDropdownColor('seStSvRoomSelect', status);
+            }
+        }
+
+        // Data loading and saving functions
         function loadSavedData() {
-            if (appState.isInspectionMode) {
+            const saved = localStorage.getItem('roomInspectionApp');
+            if (saved) {
+                showMessageModal('Data Loaded', 'Saved data has been loaded successfully!');
                 refreshUIFromState();
-                showMessageModal('Data Loaded', 'Saved inspection data has been loaded successfully.');
             } else {
-                showMessageModal('No Data', 'No saved inspection data found. Please start a new inspection or import data.');
+                showMessageModal('No Saved Data', 'No saved data found.');
             }
         }
 
-        // Back to input functions
-        function backToInput() {
-            if (appState.mode === 'site') {
-                showRoomInputPage();
-            } else {
-                showCodeInputPage();
+        function downloadJsonData() {
+            try {
+                const dataStr = JSON.stringify(appState, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `room_inspection_data_${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                URL.revokeObjectURL(url);
+                showMessageModal('Export Successful', 'Data exported successfully!');
+            } catch (error) {
+                console.error('Export failed:', error);
+                showMessageModal('Export Failed', 'Failed to export data. Please try again.');
             }
+        }
+
+        function backToInput() {
+            appState.isInspectionMode = false;
+            saveDataToStorage();
+            showRoomInputPage();
         }
 
         function backToCodeInput() {
+            appState.isInspectionMode = false;
+            saveDataToStorage();
             showCodeInputPage();
         }
 
@@ -1575,6 +2335,34 @@ Room Codes (Room- Codes)
             generateCodeCheckItems();
             showCodeCheckPage();
             updateCodeCheckPage();
+        }
+
+        function startSeStSvInspection() {
+            const roomText = roomNumbersTextarea.value.trim();
+            if (!roomText) {
+                showMessageModal('Input Required', 'Please enter room numbers.');
+                return;
+            }
+
+            appState.seStSvRooms = roomText.split('\n').map(room => room.trim()).filter(room => room);
+            appState.currentSeStSvRoomIndex = 0;
+            appState.seStSvData = {};
+            appState.isInspectionMode = true;
+
+            // Initialize SE/ST/SV data for each room
+            appState.seStSvRooms.forEach(room => {
+                appState.seStSvData[room] = {
+                    'SE': [],
+                    'ST': [],
+                    'SV': [],
+                    'Clamps': [] // Store clamp quantities for ST entries
+                };
+            });
+
+            saveDataToStorage();
+            showRoomSeStSvCheckPage();
+            updateSeStSvPage();
+            generateSeStSvEntries();
         }
 
         // Generate check items for site inspection
@@ -1765,16 +2553,10 @@ Room Codes (Room- Codes)
             document.getElementById('progressFill').style.width = progressPercent + '%';
 
             // Update room select dropdown
-            roomSelect.innerHTML = '';
-            appState.rooms.forEach((room, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = room;
-                if (index === appState.currentRoomIndex) {
-                    option.selected = true;
-                }
-                roomSelect.appendChild(option);
-            });
+            updateCustomDropdownOptions('roomSelect', appState.rooms, appState.currentRoomIndex);
+
+            // Update room select color based on status
+            updateRoomSelectColor();
 
             // Update navigation buttons
             document.getElementById('prevRoom').disabled = appState.currentRoomIndex === 0;
@@ -1799,16 +2581,10 @@ Room Codes (Room- Codes)
             document.getElementById('codeProgressFill').style.width = progressPercent + '%';
 
             // Update code room select dropdown
-            codeRoomSelect.innerHTML = '';
-            roomNames.forEach((roomName, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = roomName;
-                if (index === appState.currentCodeRoomIndex) {
-                    option.selected = true;
-                }
-                codeRoomSelect.appendChild(option);
-            });
+            updateCustomDropdownOptions('codeRoomSelect', roomNames, appState.currentCodeRoomIndex);
+
+            // Update room select color based on status
+            updateCodeRoomSelectColor();
 
             // Update navigation buttons
             document.getElementById('prevCodeRoom').disabled = appState.currentCodeRoomIndex === 0;
@@ -1860,15 +2636,14 @@ Room Codes (Room- Codes)
 
             codesForCurrentRoom.forEach(code => {
                 const uniqueCodeId = `${currentRoomName}-${code}`;
-                const selectedStatusIndex = appState.checkData[uniqueCodeId];
-                const commentText = appState.codeSpecificComments[uniqueCodeId] || '';
+                const statusIndex = appState.checkData[uniqueCodeId];
+                const comment = appState.codeSpecificComments[uniqueCodeId] || '';
 
+                // Update status button
                 const statusButton = document.querySelector(`.status-button[data-code-id="${uniqueCodeId}"]`);
-                const commentTextarea = document.querySelector(`.comment-textarea[data-code-id="${uniqueCodeId}"]`);
-
                 if (statusButton) {
-                    if (selectedStatusIndex !== null) {
-                        statusButton.textContent = codeStatusOptions[selectedStatusIndex];
+                    if (statusIndex !== null && statusIndex !== undefined) {
+                        statusButton.textContent = codeStatusOptions[statusIndex];
                         statusButton.classList.add('selected');
                     } else {
                         statusButton.textContent = 'Select Status';
@@ -1876,126 +2651,12 @@ Room Codes (Room- Codes)
                     }
                 }
 
+                // Update comment textarea
+                const commentTextarea = document.querySelector(`.comment-textarea[data-code-id="${uniqueCodeId}"]`);
                 if (commentTextarea) {
-                    commentTextarea.value = commentText;
+                    commentTextarea.value = comment;
                 }
             });
-        }
-
-        // Handle room select change for site inspection
-        function handleRoomSelectChange(event) {
-            const selectedIndex = parseInt(event.target.value);
-            appState.currentRoomIndex = selectedIndex;
-            saveDataToStorage();
-            updateCheckPage();
-            generateCheckItems(); // Regenerate checks for the newly selected room
-            updateCheckStates();
-            window.scrollTo(0, 0); // Scroll to top
-        }
-
-        // Handle code room select change for code inspection
-        function handleCodeRoomSelectChange(event) {
-            const selectedIndex = parseInt(event.target.value);
-            appState.currentCodeRoomIndex = selectedIndex;
-            saveDataToStorage();
-            generateCodeCheckItems();
-            updateCodeCheckPage();
-            updateCodeCheckStates();
-            window.scrollTo(0, 0); // Scroll to top
-        }
-
-        // Page navigation functions
-        function showMainMenuPage() {
-            hideAllPages();
-            mainMenuPage.classList.add('active');
-            window.scrollTo(0, 0); // Scroll to top
-        }
-
-        function showRoomInputPage() {
-            hideAllPages();
-            roomInputPage.classList.add('active');
-            window.scrollTo(0, 0); // Scroll to top
-        }
-
-        function showCodeInputPage() {
-            hideAllPages();
-            codeInputPage.classList.add('active');
-            window.scrollTo(0, 0); // Scroll to top
-        }
-
-        function showCheckPage() {
-            hideAllPages();
-            checkPage.classList.add('active');
-            window.scrollTo(0, 0); // Scroll to top
-        }
-
-        function showCodeCheckPage() {
-            hideAllPages();
-            codeCheckPage.classList.add('active');
-            window.scrollTo(0, 0); // Scroll to top
-        }
-
-        function showRoomSeStSvInputPage() {
-            hideAllPages();
-            roomSeStSvInputPage.classList.add('active');
-            window.scrollTo(0, 0); // Scroll to top
-        }
-
-        function showRoomSeStSvCheckPage() {
-            hideAllPages();
-            roomSeStSvCheckPage.classList.add('active');
-            window.scrollTo(0, 0); // Scroll to top
-        }
-
-        function showCompletionPage() {
-            hideAllPages();
-            completionPage.classList.add('active');
-            window.scrollTo(0, 0); // Scroll to top
-        }
-
-        function hideAllPages() {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-        }
-
-        // SE/ST/SV Functions
-        function startSeStSvInspection() {
-            const roomNumbers = roomNumbersTextarea.value.trim();
-            if (!roomNumbers) {
-                showMessageModal('Input Required', 'Please enter at least one room number.');
-                return;
-            }
-
-            const roomList = roomNumbers.split('\n').map(room => room.trim()).filter(room => room);
-            if (roomList.length === 0) {
-                showMessageModal('Input Required', 'Please enter at least one valid room number.');
-                return;
-            }
-
-            // Validate all room numbers
-            for (const room of roomList) {
-                if (room.length < 6) {
-                    showMessageModal('Invalid Room Number', `Room number "${room}" must be at least 6 characters long for prefix generation.`);
-                    return;
-                }
-            }
-
-            // Initialize multi-room SE/ST/SV data
-            appState.seStSvRooms = roomList;
-            appState.currentSeStSvRoomIndex = 0;
-            appState.seStSvData = {};
-            
-            // Initialize data for each room
-            roomList.forEach(room => {
-                appState.seStSvData[room] = { 'SE': [], 'ST': [], 'SV': [], 'Clamps': [] };
-            });
-
-            appState.isInspectionMode = true;
-            saveDataToStorage();
-            showRoomSeStSvCheckPage();
-            updateSeStSvPage();
-            generateSeStSvEntries();
         }
 
         function updateSeStSvPage() {
@@ -2015,6 +2676,9 @@ Room Codes (Room- Codes)
             // Update room selector
             updateSeStSvRoomSelector();
             
+            // Update room select color based on status
+            updateSeStSvRoomSelectColor();
+            
             // Update navigation buttons
             const prevBtn = document.getElementById('prevSeStSvRoom');
             const nextBtn = document.getElementById('nextSeStSvRoom');
@@ -2030,17 +2694,8 @@ Room Codes (Room- Codes)
         }
 
         function updateSeStSvRoomSelector() {
-            seStSvRoomSelect.innerHTML = '';
-            appState.seStSvRooms.forEach((room, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = room;
-                option.selected = index === appState.currentSeStSvRoomIndex;
-                seStSvRoomSelect.appendChild(option);
-            });
+            updateCustomDropdownOptions('seStSvRoomSelect', appState.seStSvRooms, appState.currentSeStSvRoomIndex);
         }
-
-
 
         function generateSeStSvEntries() {
             if (appState.seStSvRooms.length === 0) return;
@@ -2075,21 +2730,36 @@ Room Codes (Room- Codes)
             svTextarea.oninput = (e) => handleSeStSvTextareaInput("SV", e.target.value);
         }
 
+        // Enhanced handleSeStSvTextareaInput function to support whole room numbers
         function handleSeStSvTextareaInput(type, value) {
             const currentRoom = appState.seStSvRooms[appState.currentSeStSvRoomIndex];
             
             if (type === 'ST') {
-                // Parse ST codes and clamp quantities
+                // Parse ST codes and clamp quantities with enhanced logic for whole room numbers
                 const stEntries = value.split("\n").map(line => line.trim()).filter(line => line);
                 const stCodes = [];
                 const clampQuantities = [];
                 
                 stEntries.forEach(entry => {
-                    if (entry.includes('-')) {
+                    if (isWholeRoomNumber(entry)) {
+                        // Handle whole room numbers (with or without clamps)
+                        if (entry.includes('-')) {
+                            // Whole room number with clamps (e.g., "1ABC01ST0123-2")
+                            const [wholeCode, clampQty] = entry.split('-');
+                            stCodes.push(wholeCode.trim());
+                            clampQuantities.push(clampQty.trim());
+                        } else {
+                            // Whole room number without clamps (e.g., "1ABC01ST0123")
+                            stCodes.push(entry);
+                            clampQuantities.push(''); // No clamp quantity
+                        }
+                    } else if (entry.includes('-')) {
+                        // Regular code with clamps (e.g., "1111-2")
                         const [code, clampQty] = entry.split('-');
                         stCodes.push(code.trim());
                         clampQuantities.push(clampQty.trim());
                     } else {
+                        // Regular code without clamps (e.g., "1111")
                         stCodes.push(entry);
                         clampQuantities.push(''); // No clamp quantity
                     }
@@ -2105,6 +2775,7 @@ Room Codes (Room- Codes)
             saveDataToStorage();
         }
 
+        // Enhanced exportSeStSvToCsv function to handle whole room numbers
         function exportSeStSvToCsv() {
             try {
                 const headers = ['Room Number', 'SE', 'ST', 'Clamps', 'SV'];
@@ -2116,7 +2787,18 @@ Room Codes (Room- Codes)
                     const roomData = appState.seStSvData[room];
 
                     const seCodes = roomData['SE'].filter(code => code.trim()).map(code => `${roomPrefix}SE${code}`);
-                    const stCodes = roomData['ST'].filter(code => code.trim()).map(code => `${roomPrefix}ST${code}`);
+                    
+                    // Enhanced ST code processing
+                    const stCodes = roomData['ST'].filter(code => code.trim()).map(code => {
+                        if (isWholeRoomNumber(code)) {
+                            // If it's a whole room number, use it as-is (no prefix needed)
+                            return code;
+                        } else {
+                            // If it's a regular code, add the room prefix
+                            return `${roomPrefix}ST${code}`;
+                        }
+                    });
+                    
                     const svCodes = roomData['SV'].filter(code => code.trim()).map(code => `${roomPrefix}SV${code}`);
                     const clampQuantities = roomData['Clamps'] || [];
 
@@ -2236,6 +2918,9 @@ Room Codes (Room- Codes)
                     'ST': [],
                     'SV': []
                 },
+                seStSvRooms: [],
+                currentSeStSvRoomIndex: 0,
+                seStSvData: {},
                 currentRoomIndex: 0,
                 currentCodeRoomIndex: 0,
                 checkData: {},
@@ -2262,6 +2947,148 @@ Room Codes (Room- Codes)
                 // Merge saved state with default appState, ensuring new properties are not lost
                 appState = { ...appState, ...savedState };
             }
+        }
+
+        // Floating and Docking Button System - iOS Optimized
+        let floatingButtonsContainer = null;
+        let originalButtonsContainer = null;
+        let isFloatingActive = false;
+        let lastScrollY = 0;
+        let ticking = false;
+
+        function initFloatingButtons() {
+            createFloatingButtons();
+            setupScrollListener();
+            checkButtonPosition();
+        }
+
+        function createFloatingButtons() {
+            originalButtonsContainer = document.querySelector('.room-status-buttons');
+            if (!originalButtonsContainer) return;
+            
+            floatingButtonsContainer = document.createElement('div');
+            floatingButtonsContainer.className = 'floating-buttons hidden';
+            floatingButtonsContainer.innerHTML = `
+                <button class="status-btn no-access" data-floating="true">No Access</button>
+                <button class="status-btn completed" data-floating="true">Completed Room</button>
+            `;
+            
+            document.body.appendChild(floatingButtonsContainer);
+            
+            const floatingNoAccessBtn = floatingButtonsContainer.querySelector('.no-access');
+            const floatingCompletedBtn = floatingButtonsContainer.querySelector('.completed');
+            
+            floatingNoAccessBtn.addEventListener('click', handleFloatingButtonClick);
+            floatingCompletedBtn.addEventListener('click', handleFloatingButtonClick);
+            floatingNoAccessBtn.addEventListener('touchstart', handleTouchStart, { passive: true });
+            floatingCompletedBtn.addEventListener('touchstart', handleTouchStart, { passive: true });
+        }
+
+        function handleFloatingButtonClick(event) {
+            const isNoAccess = event.target.classList.contains('no-access');
+            
+            if (document.getElementById('checkPage').classList.contains('active')) {
+                setRoomStatus(isNoAccess ? 'no-access' : 'completed');
+            } else if (document.getElementById('codeCheckPage').classList.contains('active')) {
+                setCodeRoomStatus(isNoAccess ? 'no-access' : 'completed');
+            } else if (document.getElementById('roomSeStSvCheckPage').classList.contains('active')) {
+                setSeStSvRoomStatus(isNoAccess ? 'no-access' : 'completed');
+            }
+            
+            if (window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate(50);
+            }
+        }
+
+        function handleTouchStart(event) {
+            event.target.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                event.target.style.transform = '';
+            }, 150);
+        }
+
+        function setupScrollListener() {
+            window.addEventListener('scroll', () => {
+                lastScrollY = window.scrollY;
+                if (!ticking) {
+                    requestAnimationFrame(updateButtonPosition);
+                    ticking = true;
+                }
+            }, { passive: true });
+        }
+
+        function updateButtonPosition() {
+            checkButtonPosition();
+            ticking = false;
+        }
+
+        function checkButtonPosition() {
+            if (!originalButtonsContainer || !floatingButtonsContainer) return;
+            
+            const originalRect = originalButtonsContainer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const scrollY = window.scrollY;
+            
+            const isOriginalVisible = originalRect.top < windowHeight && originalRect.bottom > 0;
+            const shouldFloat = !isOriginalVisible && scrollY > 100;
+            
+            if (shouldFloat && !isFloatingActive) {
+                showFloatingButtons();
+            } else if (!shouldFloat && isFloatingActive) {
+                hideFloatingButtons();
+            }
+            
+            if (isOriginalVisible && originalRect.top < windowHeight - 100) {
+                dockButtons();
+            } else if (isFloatingActive) {
+                undockButtons();
+            }
+        }
+
+        function showFloatingButtons() {
+            if (!floatingButtonsContainer) return;
+            isFloatingActive = true;
+            floatingButtonsContainer.classList.remove('hidden');
+            originalButtonsContainer.classList.add('floating-active');
+            floatingButtonsContainer.offsetHeight;
+        }
+
+        function hideFloatingButtons() {
+            if (!floatingButtonsContainer) return;
+            isFloatingActive = false;
+            floatingButtonsContainer.classList.add('hidden');
+            originalButtonsContainer.classList.remove('floating-active');
+            originalButtonsContainer.classList.add('docked-active');
+        }
+
+        function dockButtons() {
+            if (!floatingButtonsContainer) return;
+            floatingButtonsContainer.classList.add('docked');
+            originalButtonsContainer.classList.add('docked-active');
+        }
+
+        function undockButtons() {
+            if (!floatingButtonsContainer) return;
+            floatingButtonsContainer.classList.remove('docked');
+            originalButtonsContainer.classList.remove('docked-active');
+        }
+
+        function cleanupFloatingButtons() {
+            if (floatingButtonsContainer) {
+                floatingButtonsContainer.remove();
+                floatingButtonsContainer = null;
+            }
+            if (originalButtonsContainer) {
+                originalButtonsContainer.classList.remove('floating-active', 'docked-active');
+            }
+            isFloatingActive = false;
+        }
+
+        function initFloatingButtonsForPage() {
+            cleanupFloatingButtons();
+            setTimeout(() => {
+                initFloatingButtons();
+            }, 100);
         }
 
         // Initialize the app when DOM is loaded
