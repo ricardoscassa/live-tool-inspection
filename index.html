@@ -16,17 +16,6 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
-            /* iOS optimizations */
-            -webkit-text-size-adjust: 100%;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-        
-        /* Allow text selection for textareas and inputs */
-        textarea, input {
-            -webkit-user-select: text;
-            user-select: text;
         }
         
         .container {
@@ -93,9 +82,6 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            /* iOS touch optimization */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
         
         .menu-button.primary {
@@ -136,9 +122,6 @@
             font-family: inherit;
             resize: vertical;
             transition: border-color 0.3s ease;
-            /* iOS optimizations */
-            -webkit-appearance: none;
-            appearance: none;
         }
         
         .room-textarea:focus {
@@ -167,8 +150,6 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             min-height: 50px;
-            /* iOS touch optimization */
-            -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
         
@@ -234,9 +215,6 @@
             justify-content: space-between;
             align-items: center;
             text-align: left;
-            /* iOS optimizations */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
 
         .custom-dropdown-button:focus {
@@ -286,9 +264,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            /* iOS optimizations */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
 
         .custom-dropdown-option:last-child {
@@ -404,9 +379,6 @@
             background-size: 12px;
             cursor: pointer;
             transition: border-color 0.3s ease;
-            /* iOS optimizations */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
 
         .room-select:focus {
@@ -480,8 +452,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 1rem;
-            /* iOS touch optimization */
-            -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
 
@@ -528,6 +498,7 @@
         .progress-bar {
             width: 100%;
             height: 8px;
+            background: #e1e5e9;
             border-radius: 4px;
             margin: 20px 0;
             overflow: hidden;
@@ -600,9 +571,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: 100%;
-            /* iOS touch optimization */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
 
         .status-button:hover {
@@ -634,53 +602,10 @@
             padding: 10px 15px;
             cursor: pointer;
             white-space: nowrap;
-            /* iOS touch optimization */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
 
         .status-option:hover {
             background-color: #f0f0f0;
-        }
-
-        /* Enhanced Comment Section with Predefined Choices */
-        .comment-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .comment-choices {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-
-        .comment-choice-btn {
-            background: #f8f9fa;
-            border: 1px solid #e1e5e9;
-            border-radius: 6px;
-            padding: 6px 12px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            /* iOS touch optimization */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-
-        .comment-choice-btn:hover {
-            background: #e9ecef;
-            border-color: #667eea;
-        }
-
-        .comment-choice-btn.selected {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
         }
 
         .comment-textarea {
@@ -693,15 +618,6 @@
             font-family: inherit;
             resize: vertical;
             box-sizing: border-box;
-            /* iOS optimizations */
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        .comment-textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
         }
 
         /* Room status buttons */
@@ -723,9 +639,6 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            /* iOS touch optimization */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
 
         .status-btn.no-access {
@@ -837,9 +750,6 @@
             font-weight: 600;
             transition: all 0.3s ease;
             border: 2px dashed transparent;
-            /* iOS touch optimization */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
 
         .file-input-label:hover {
@@ -899,9 +809,6 @@
             border-radius: 6px;
             font-size: 1rem;
             min-width: 0; /* Allow input to shrink on small screens */
-            /* iOS optimizations */
-            -webkit-appearance: none;
-            appearance: none;
         }
 
         .entry-input:focus {
@@ -921,9 +828,6 @@
             transition: background 0.3s ease;
             flex-shrink: 0;
             white-space: nowrap;
-            /* iOS touch optimization */
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
         }
 
         .remove-entry-btn:hover {
@@ -949,7 +853,7 @@
             font-size: 1rem;
         }
         
-        /* Responsive Design - Enhanced for iOS */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -1038,36 +942,36 @@
                 font-size: 1.1rem;
             }
 
-            .textarea-wrapper {
-                position: relative;
-                width: 100%;
-            }
+        .textarea-wrapper {
+            position: relative;
+            width: 100%;
+        }
 
-            .entry-textarea {
-                min-height: 150px; /* Increased height for better usability */
-                font-size: 1.1rem;
-                padding: 12px;
-                padding-right: 50px; /* Extra space for counter on mobile */
-                text-align: left; /* Align text to left for multi-line input */
-            }
+        .entry-textarea {
+            min-height: 150px; /* Increased height for better usability */
+            font-size: 1.1rem;
+            padding: 12px;
+            padding-right: 50px; /* Extra space for counter on mobile */
+            text-align: left; /* Align text to left for multi-line input */
+        }
 
-            .code-count {
-                position: absolute;
-                bottom: 8px;
-                right: 8px;
-                background-color: rgba(0, 0, 0, 0.7);
-                color: white;
-                padding: 6px 10px;
-                border-radius: 8px;
-                font-size: 0.9rem;
-                font-weight: bold;
-                display: none; /* Hidden by default */
-                z-index: 10;
-                pointer-events: none; /* Prevent interference with textarea interaction */
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                min-width: 24px;
-                text-align: center;
-            }
+        .code-count {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: none; /* Hidden by default */
+            z-index: 10;
+            pointer-events: none; /* Prevent interference with textarea interaction */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            min-width: 24px;
+            text-align: center;
+        }
 
             .remove-entry-btn {
                 align-self: center;
@@ -1084,24 +988,6 @@
                 border-radius: 10px;
                 min-width: 28px;
             }
-
-            /* Enhanced comment choices for mobile */
-            .comment-choices {
-                gap: 8px;
-                margin-bottom: 10px;
-            }
-
-            .comment-choice-btn {
-                padding: 8px 14px;
-                font-size: 0.9rem;
-                border-radius: 8px;
-            }
-
-            .comment-textarea {
-                min-height: 44px; /* Larger touch target for iOS */
-                font-size: 16px; /* Prevent zoom on iOS */
-                padding: 10px;
-            }
         }
         
         @media (max-width: 480px) {
@@ -1113,6 +999,7 @@
                 font-size: 1.3rem;
             }
 
+            /* Additional mobile improvements for very small screens */
             .se-st-sv-section {
                 padding: 10px;
             }
@@ -1139,32 +1026,6 @@
                 padding: 10px 14px;
                 border-radius: 12px;
                 min-width: 32px;
-            }
-
-            /* Enhanced comment choices for very small screens */
-            .comment-choice-btn {
-                padding: 10px 16px;
-                font-size: 1rem;
-                border-radius: 10px;
-            }
-
-            .comment-textarea {
-                min-height: 48px; /* Even larger touch target */
-                font-size: 16px;
-                padding: 12px;
-            }
-        }
-
-        /* iOS Safari specific optimizations */
-        @supports (-webkit-touch-callout: none) {
-            .button, .check-btn, .status-btn, .comment-choice-btn {
-                -webkit-appearance: none;
-                border-radius: 10px;
-            }
-            
-            .room-textarea, .comment-textarea, .entry-input {
-                -webkit-appearance: none;
-                border-radius: 10px;
             }
         }
     </style>
@@ -1293,7 +1154,7 @@ Room Codes (Room- Codes)
             </div>
         </div>
 
-        <!-- Code Check Page (Enhanced with Predefined Comment Choices) -->
+        <!-- Code Check Page (New) -->
         <div id="codeCheckPage" class="page">
             <div class="card">
                 <div class="code-header">
@@ -1462,8 +1323,8 @@ Room Codes (Room- Codes)
                     <div id="fileName" class="file-name"></div>
                 </div>
                 <div class="modal-buttons">
-                    <button id="uploadFile" class="button">Upload</button>
-                    <button id="cancelUpload" class="button secondary">Cancel</button>
+                    <button id="uploadJsonFile" class="button success" disabled>Upload</button>
+                    <button id="cancelFileUpload" class="button secondary">Cancel</button>
                 </div>
             </div>
         </div>
@@ -1471,38 +1332,35 @@ Room Codes (Room- Codes)
         <!-- Message Modal -->
         <div id="messageModal" class="modal">
             <div class="modal-content">
-                <h3 id="messageTitle" style="margin-bottom: 20px; color: #333;">Message</h3>
-                <p id="messageContent" class="message-content">Message content here</p>
-                <div class="modal-buttons">
-                    <button id="messageOk" class="button">OK</button>
-                </div>
+                <h3 id="messageModalTitle" style="margin-bottom: 15px; color: #333;"></h3>
+                <div id="messageModalContent" class="message-content"></div>
+                <button id="closeMessageModal" class="button">OK</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Global variables
+        // Application state
         let appState = {
+            mode: 'site', // 'site', 'code', or 'seststv'
             rooms: [],
-            currentRoomIndex: 0,
-            checkData: {},
-            roomStatus: {},
-            isInspectionMode: false,
             roomCodes: {},
-            currentCodeRoomIndex: 0,
-            codeSpecificComments: {},
+            roomNumber: '',
+            seStSvEntries: {
+                'SE': [],
+                'ST': [],
+                'SV': []
+            },
             seStSvRooms: [],
             currentSeStSvRoomIndex: 0,
-            seStSvData: {}
+            seStSvData: {},
+            currentRoomIndex: 0,
+            currentCodeRoomIndex: 0,
+            checkData: {},
+            codeSpecificComments: {},
+            isInspectionMode: false,
+            roomStatus: {}
         };
-
-        // Predefined comment choices for ECS Inspection
-        const commentChoices = [
-            "Previously installed",
-            "Can be Installed",
-            "Issue with Install",
-            "No Access"
-        ];
 
         // Check labels for site inspection
         const checkLabels = [
@@ -1564,70 +1422,251 @@ Room Codes (Room- Codes)
         ];
 
         // DOM elements
-        const roomListTextarea = document.getElementById('roomList');
-        const codeListTextarea = document.getElementById('codeList');
-        const roomNumbersTextarea = document.getElementById('roomNumbers');
+        const mainMenuPage = document.getElementById('mainMenuPage');
+        const roomInputPage = document.getElementById('roomInputPage');
+        const codeInputPage = document.getElementById('codeInputPage');
+        const roomSeStSvInputPage = document.getElementById('roomSeStSvInputPage');
+        const checkPage = document.getElementById('checkPage');
+        const codeCheckPage = document.getElementById('codeCheckPage');
+        const roomSeStSvCheckPage = document.getElementById('roomSeStSvCheckPage');
+        const completionPage = document.getElementById('completionPage');
+        const resetModal = document.getElementById('resetModal');
+        const roomListTextarea = document.getElementById("roomList");
+        const codeListTextarea = document.getElementById("codeList");
+        const roomNumbersTextarea = document.getElementById("roomNumbers");
+        const seStSvRoomSelect = document.getElementById("seStSvRoomSelect");
+        const roomSelect = document.getElementById("roomSelect");
+        const codeRoomSelect = document.getElementById("codeRoomSelect");
 
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            loadDataFromStorage();
-            setupEventListeners();
-            
-            // Check if we're in inspection mode and show appropriate page
-            if (appState.isInspectionMode) {
-                refreshUIFromState();
-            } else {
-                showMainMenu();
-            }
-        });
+        // File Upload Modal Elements
+        const fileUploadModal = document.getElementById('fileUploadModal');
+        const jsonFileInput = document.getElementById('jsonFileInput');
+        const fileInputLabel = document.querySelector('.file-input-label');
+        const fileName = document.getElementById('fileName');
+        const uploadJsonFileButton = document.getElementById('uploadJsonFile');
+        const cancelFileUploadButton = document.getElementById('cancelFileUpload');
 
+        // Message Modal Elements
+        const messageModal = document.getElementById('messageModal');
+        const messageModalTitle = document.getElementById('messageModalTitle');
+        const messageModalContent = document.getElementById('messageModalContent');
+        const closeMessageModalButton = document.getElementById('closeMessageModal');
+
+        // Helper function to check if a string matches the whole room number pattern
+        function isWholeRoomNumber(entry) {
+            // Pattern: digit + letters + digits + "ST" + digits (optionally followed by "-" and digits for clamps)
+            // More flexible pattern to handle various formats like 1HPB0NST1234
+            const wholeRoomPattern = /^\d[A-Z0-9]*\d{4}(-\d+)?$/;
+            return wholeRoomPattern.test(entry);
+        }
+
+        // Initialize the application
+        function initApp() {
+            loadDataFromStorage(); // Load appState from localStorage
+            setupEventListeners(); // Set up all event listeners
+            refreshUIFromState(); // Refresh UI based on loaded state
+        }
+
+        // Set up all event listeners
         function setupEventListeners() {
             // Main menu buttons
-            document.getElementById('siteInspectionBtn').addEventListener('click', showRoomInputPage);
-            document.getElementById('codeInspectionBtn').addEventListener('click', showCodeInputPage);
-            document.getElementById('roomSeStSvInspectionBtn').addEventListener('click', showRoomSeStSvInputPage);
+            document.getElementById('siteInspectionBtn').addEventListener('click', () => {
+                appState.mode = 'site';
+                showRoomInputPage();
+            });
+            document.getElementById('codeInspectionBtn').addEventListener('click', () => {
+                appState.mode = 'code';
+                showCodeInputPage();
+            });
+            document.getElementById('roomSeStSvInspectionBtn').addEventListener('click', () => {
+                appState.mode = 'seststv';
+                showRoomSeStSvInputPage();
+            });
 
             // Room input page buttons
             document.getElementById('startInspection').addEventListener('click', startInspection);
             document.getElementById('loadSavedData').addEventListener('click', loadSavedData);
             document.getElementById('exportJsonData').addEventListener('click', downloadJsonData);
-            document.getElementById('importJsonData').addEventListener('click', () => showFileUploadModal('site'));
-            document.getElementById('resetApp').addEventListener('click', () => showResetModal('site'));
-            document.getElementById('backToMainMenu').addEventListener('click', showMainMenu);
+            document.getElementById('importJsonData').addEventListener('click', showFileUploadModal);
+            document.getElementById('resetApp').addEventListener('click', showResetModal);
+            document.getElementById('backToMainMenu').addEventListener('click', () => {
+                appState.isInspectionMode = false;
+                saveDataToStorage();
+                showMainMenuPage();
+            });
 
             // Code input page buttons
             document.getElementById('startCodeInspection').addEventListener('click', startCodeInspection);
             document.getElementById('loadSavedCodeData').addEventListener('click', loadSavedData);
             document.getElementById('exportCodeJsonData').addEventListener('click', downloadJsonData);
-            document.getElementById('importCodeJsonData').addEventListener('click', () => showFileUploadModal('code'));
-            document.getElementById('resetCodeApp').addEventListener('click', () => showResetModal('code'));
-            document.getElementById('backToMainMenuFromCode').addEventListener('click', showMainMenu);
+            document.getElementById('importCodeJsonData').addEventListener('click', showFileUploadModal);
+            document.getElementById('resetCodeApp').addEventListener('click', showResetModal);
+            document.getElementById('backToMainMenuFromCode').addEventListener('click', () => {
+                appState.isInspectionMode = false;
+                saveDataToStorage();
+                showMainMenuPage();
+            });
 
             // SE/ST/SV input page buttons
             document.getElementById('startSeStSvInspection').addEventListener('click', startSeStSvInspection);
             document.getElementById('loadSavedSeStSvData').addEventListener('click', loadSavedData);
             document.getElementById('exportSeStSvJsonData').addEventListener('click', downloadJsonData);
-            document.getElementById('importSeStSvJsonData').addEventListener('click', () => showFileUploadModal('seStSv'));
-            document.getElementById('resetSeStSvApp').addEventListener('click', () => showResetModal('seStSv'));
-            document.getElementById('backToMainMenuFromSeStSv').addEventListener('click', showMainMenu);
+            document.getElementById('importSeStSvJsonData').addEventListener('click', showFileUploadModal);
+            document.getElementById('resetSeStSvApp').addEventListener('click', showResetModal);
+            document.getElementById('backToMainMenuFromSeStSv').addEventListener('click', () => {
+                appState.isInspectionMode = false;
+                saveDataToStorage();
+                showMainMenuPage();
+            });
+
+            // SE/ST/SV check page buttons
+            document.getElementById('exportSeStSvCsv').addEventListener('click', exportSeStSvToCsv);
+            document.getElementById('backToSeStSvInput').addEventListener('click', () => showRoomSeStSvInputPage());
+
+            // SE/ST/SV room navigation
+            document.getElementById('prevSeStSvRoom').addEventListener('click', () => {
+                if (appState.currentSeStSvRoomIndex > 0) {
+                    appState.currentSeStSvRoomIndex--;
+                    saveDataToStorage();
+                    updateSeStSvPage();
+                    generateSeStSvEntries();
+                    window.scrollTo(0, 0);
+                }
+            });
+
+            document.getElementById('nextSeStSvRoom').addEventListener('click', () => {
+                if (appState.currentSeStSvRoomIndex < appState.seStSvRooms.length - 1) {
+                    appState.currentSeStSvRoomIndex++;
+                    saveDataToStorage();
+                    updateSeStSvPage();
+                    generateSeStSvEntries();
+                    window.scrollTo(0, 0);
+                }
+            });
+
+            // SE/ST/SV room selector
+            seStSvRoomSelect.addEventListener('change', (e) => {
+                appState.currentSeStSvRoomIndex = parseInt(e.target.value);
+                saveDataToStorage();
+                updateSeStSvPage();
+                generateSeStSvEntries();
+            });
 
             // Check page buttons
-            document.getElementById('prevRoom').addEventListener('click', () => navigateRoom(-1));
-            document.getElementById('nextRoom').addEventListener('click', () => navigateRoom(1));
+            document.getElementById('prevRoom').addEventListener('click', () => {
+                if (appState.currentRoomIndex > 0) {
+                    appState.currentRoomIndex--;
+                    saveDataToStorage();
+                    updateCheckPage();
+                    generateCheckItems();
+                    updateCheckStates();
+                    window.scrollTo(0, 0); // Scroll to top
+                }
+            });
+            document.getElementById('nextRoom').addEventListener('click', () => {
+                if (appState.currentRoomIndex < appState.rooms.length - 1) {
+                    appState.currentRoomIndex++;
+                    saveDataToStorage();
+                    updateCheckPage();
+                    generateCheckItems();
+                    updateCheckStates();
+                    window.scrollTo(0, 0); // Scroll to top
+                } else {
+                    showCompletionPage();
+                }
+            });
             document.getElementById('exportExcel').addEventListener('click', exportToCsv);
             document.getElementById('backToInput').addEventListener('click', backToInput);
 
             // Code check page buttons
-            document.getElementById('prevCodeRoom').addEventListener('click', () => navigateCodeRoom(-1));
-            document.getElementById('nextCodeRoom').addEventListener('click', () => navigateCodeRoom(1));
+            document.getElementById('prevCodeRoom').addEventListener('click', () => {
+                if (appState.currentCodeRoomIndex > 0) {
+                    appState.currentCodeRoomIndex--;
+                    saveDataToStorage();
+                    generateCodeCheckItems();
+                    updateCodeCheckPage();
+                    updateCodeCheckStates();
+                    window.scrollTo(0, 0); // Scroll to top
+                }
+            });
+            document.getElementById('nextCodeRoom').addEventListener('click', () => {
+                const totalRooms = Object.keys(appState.roomCodes).length;
+                if (appState.currentCodeRoomIndex < totalRooms - 1) {
+                    appState.currentCodeRoomIndex++;
+                    saveDataToStorage();
+                    generateCodeCheckItems();
+                    updateCodeCheckPage();
+                    updateCodeCheckStates();
+                    window.scrollTo(0, 0); // Scroll to top
+                } else {
+                    showCompletionPage();
+                }
+            });
             document.getElementById('exportCodeExcel').addEventListener('click', exportCodeToCsv);
             document.getElementById('backToCodeInput').addEventListener('click', backToCodeInput);
 
-            // SE/ST/SV check page buttons
-            document.getElementById('prevSeStSvRoom').addEventListener('click', () => navigateSeStSvRoom(-1));
-            document.getElementById('nextSeStSvRoom').addEventListener('click', () => navigateSeStSvRoom(1));
-            document.getElementById('exportSeStSvCsv').addEventListener('click', exportSeStSvToCsv);
-            document.getElementById('backToSeStSvInput').addEventListener('click', backToSeStSvInput);
+            // Completion page buttons
+            document.getElementById('exportExcelComplete').addEventListener('click', () => {
+                if (appState.mode === 'site') {
+                    exportToCsv();
+                } else if (appState.mode === 'code') {
+                    exportCodeToCsv();
+                } else if (appState.mode === 'seststv') {
+                    exportSeStSvToCsv();
+                }
+            });
+            document.getElementById('backToMainMenuComplete').addEventListener('click', () => {
+                appState.isInspectionMode = false;
+                saveDataToStorage();
+                showMainMenuPage();
+            });
+
+            // Add button to continue editing after completion
+            document.getElementById('continueEditingComplete').addEventListener('click', () => {
+                if (appState.mode === 'site') {
+                    generateCheckItems();
+                    showCheckPage();
+                    updateCheckPage();
+                    updateCheckStates();
+                } else if (appState.mode === 'code') {
+                    generateCodeCheckItems();
+                    showCodeCheckPage();
+                    updateCodeCheckPage();
+                    updateCodeCheckStates();
+                } else if (appState.mode === 'seststv') {
+                    showRoomSeStSvCheckPage();
+                    updateSeStSvPage();
+                    generateSeStSvEntries();
+                }
+            });
+
+            // Initialize custom dropdowns
+            initCustomDropdown('roomSelect', (index) => {
+                appState.currentRoomIndex = index;
+                saveDataToStorage();
+                updateCheckPage();
+                generateCheckItems();
+                updateCheckStates();
+            });
+            
+            initCustomDropdown('codeRoomSelect', (index) => {
+                appState.currentCodeRoomIndex = index;
+                saveDataToStorage();
+                generateCodeCheckItems();
+                updateCodeCheckPage();
+                updateCodeCheckStates();
+            });
+            
+            initCustomDropdown('seStSvRoomSelect', (index) => {
+                appState.currentSeStSvRoomIndex = index;
+                saveDataToStorage();
+                showRoomSeStSvCheckPage();
+                updateSeStSvPage();
+                generateSeStSvEntries();
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', closeAllDropdowns);
 
             // Room status buttons
             document.getElementById('noAccessBtn').addEventListener('click', () => setRoomStatus('no-access'));
@@ -1637,402 +1676,334 @@ Room Codes (Room- Codes)
             document.getElementById('seStSvNoAccessBtn').addEventListener('click', () => setSeStSvRoomStatus('no-access'));
             document.getElementById('seStSvCompletedBtn').addEventListener('click', () => setSeStSvRoomStatus('completed'));
 
-            // Completion page buttons
-            document.getElementById('exportExcelComplete').addEventListener('click', exportToCsv);
-            document.getElementById('continueEditingComplete').addEventListener('click', showCheckPage);
-            document.getElementById('backToMainMenuComplete').addEventListener('click', showMainMenu);
-
-            // Modal buttons
-            document.getElementById('confirmReset').addEventListener('click', confirmReset);
+            // Reset modal buttons
+            document.getElementById('confirmReset').addEventListener('click', resetApplication);
             document.getElementById('cancelReset').addEventListener('click', hideResetModal);
-            document.getElementById('uploadFile').addEventListener('click', uploadFile);
-            document.getElementById('cancelUpload').addEventListener('click', hideFileUploadModal);
-            document.getElementById('messageOk').addEventListener('click', hideMessageModal);
 
-            // Custom dropdown setup
-            setupCustomDropdown('roomSelect', (index) => {
-                appState.currentRoomIndex = index;
-                updateCheckPage();
-                updateCheckStates();
-                saveDataToStorage();
+            // File upload modal buttons
+            uploadJsonFileButton.addEventListener('click', uploadJsonFile);
+            cancelFileUploadButton.addEventListener('click', hideFileUploadModal);
+
+            // Message modal button
+            closeMessageModalButton.addEventListener('click', hideMessageModal);
+
+            // File input drag and drop
+            fileInputLabel.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                fileInputLabel.classList.add('drag-over');
             });
 
-            setupCustomDropdown('codeRoomSelect', (index) => {
-                appState.currentCodeRoomIndex = index;
-                updateCodeCheckPage();
-                generateCodeCheckItems();
-                updateCodeCheckStates();
-                saveDataToStorage();
+            fileInputLabel.addEventListener('dragleave', () => {
+                fileInputLabel.classList.remove('drag-over');
             });
 
-            setupCustomDropdown('seStSvRoomSelect', (index) => {
-                appState.currentSeStSvRoomIndex = index;
-                updateSeStSvPage();
-                generateSeStSvEntries();
-                saveDataToStorage();
+            fileInputLabel.addEventListener('drop', (e) => {
+                e.preventDefault();
+                fileInputLabel.classList.remove('drag-over');
+                handleFileSelection(e.dataTransfer.files);
             });
 
-            // File input handling
-            const fileInput = document.getElementById('jsonFileInput');
-            const fileLabel = document.querySelector('.file-input-label');
-            const fileName = document.getElementById('fileName');
+            jsonFileInput.addEventListener('change', (e) => {
+                handleFileSelection(e.target.files);
+            });
+        }
 
-            fileInput.addEventListener('change', function(e) {
-                if (e.target.files.length > 0) {
-                    fileName.textContent = e.target.files[0].name;
+        // Handle file selection for JSON import
+        function handleFileSelection(files) {
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.type === 'application/json' || file.name.endsWith('.json')) {
+                    jsonFileInput.files = files;
+                    fileName.textContent = file.name;
+                    uploadJsonFileButton.disabled = false;
                 } else {
-                    fileName.textContent = '';
+                    showMessageModal('Invalid File', 'Please select a JSON file.');
                 }
-            });
-
-            // Drag and drop functionality
-            fileLabel.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                fileLabel.classList.add('drag-over');
-            });
-
-            fileLabel.addEventListener('dragleave', function(e) {
-                e.preventDefault();
-                fileLabel.classList.remove('drag-over');
-            });
-
-            fileLabel.addEventListener('drop', function(e) {
-                e.preventDefault();
-                fileLabel.classList.remove('drag-over');
-                
-                if (e.dataTransfer.files.length > 0) {
-                    fileInput.files = e.dataTransfer.files;
-                    fileName.textContent = e.dataTransfer.files[0].name;
-                }
-            });
+            }
         }
 
-        // Page navigation functions
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
+        function uploadJsonFile() {
+            const file = jsonFileInput.files[0];
+            if (!file) {
+                showMessageModal("No File Selected", "Please select a JSON file to upload.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedState = JSON.parse(e.target.result);
+
+                    // Basic validation for the imported state
+                    if (typeof importedState === 'object' && importedState !== null && 'mode' in importedState) {
+                        appState = { ...appState, ...importedState }; // Merge imported state
+
+                        // Set inspection mode based on the imported data
+                        const hasSiteData = appState.mode === 'site' && appState.rooms && appState.rooms.length > 0;
+                        const hasCodeData = appState.mode === 'code' && appState.roomCodes && Object.keys(appState.roomCodes).length > 0;
+                        const hasSeStSvData = appState.mode === 'seststv' && appState.seStSvRooms && appState.seStSvRooms.length > 0;
+
+                        if (hasSiteData || hasCodeData || hasSeStSvData) {
+                            appState.isInspectionMode = true;
+                        }
+
+                        saveDataToStorage();
+                        refreshUIFromState();
+                        hideFileUploadModal();
+                        showMessageModal('Import Successful', 'Data imported successfully!');
+                    } else {
+                        showMessageModal('Invalid Data', 'The selected file does not contain valid inspection data.');
+                    }
+                } catch (error) {
+                    console.error('Import failed:', error);
+                    showMessageModal('Import Failed', 'Failed to import data. Please check the file format.');
+                }
+            };
+            reader.readAsText(file);
         }
 
-        function showMainMenu() {
-            showPage('mainMenuPage');
+        // Show/hide functions for pages and modals
+        function showMainMenuPage() {
+            hideAllPages();
+            mainMenuPage.classList.add('active');
         }
 
         function showRoomInputPage() {
-            showPage('roomInputPage');
+            hideAllPages();
+            roomInputPage.classList.add('active');
         }
 
         function showCodeInputPage() {
-            showPage('codeInputPage');
+            hideAllPages();
+            codeInputPage.classList.add('active');
         }
 
         function showRoomSeStSvInputPage() {
-            showPage('roomSeStSvInputPage');
+            hideAllPages();
+            roomSeStSvInputPage.classList.add('active');
         }
 
         function showCheckPage() {
-            showPage('checkPage');
+            hideAllPages();
+            checkPage.classList.add('active');
         }
 
         function showCodeCheckPage() {
-            showPage('codeCheckPage');
+            hideAllPages();
+            codeCheckPage.classList.add('active');
         }
 
         function showRoomSeStSvCheckPage() {
-            showPage('roomSeStSvCheckPage');
+            hideAllPages();
+            roomSeStSvCheckPage.classList.add('active');
         }
 
         function showCompletionPage() {
-            showPage('completionPage');
+            hideAllPages();
+            completionPage.classList.add('active');
         }
 
-        function backToSeStSvInput() {
-            appState.isInspectionMode = false;
-            saveDataToStorage();
-            showRoomSeStSvInputPage();
-        }
-
-        // Custom dropdown functionality
-        function setupCustomDropdown(dropdownId, onSelectCallback) {
-            const dropdown = document.getElementById(dropdownId);
-            const button = dropdown.querySelector('.custom-dropdown-button');
-            const options = dropdown.querySelector('.custom-dropdown-options');
-            const arrow = dropdown.querySelector('.custom-dropdown-arrow');
-
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const isOpen = options.classList.contains('show');
-                
-                // Close all other dropdowns
-                document.querySelectorAll('.custom-dropdown-options').forEach(opt => {
-                    opt.classList.remove('show');
-                });
-                document.querySelectorAll('.custom-dropdown-button').forEach(btn => {
-                    btn.classList.remove('open');
-                });
-
-                if (!isOpen) {
-                    options.classList.add('show');
-                    button.classList.add('open');
-                }
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function() {
-                options.classList.remove('show');
-                button.classList.remove('open');
-            });
-
-            // Handle option selection
-            options.addEventListener('click', function(e) {
-                if (e.target.classList.contains('custom-dropdown-option')) {
-                    const index = parseInt(e.target.dataset.index);
-                    onSelectCallback(index);
-                    options.classList.remove('show');
-                    button.classList.remove('open');
-                }
+        function hideAllPages() {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
             });
         }
 
-        function updateCustomDropdownOptions(dropdownId, items, selectedIndex) {
-            const dropdown = document.getElementById(dropdownId);
-            const button = dropdown.querySelector('.custom-dropdown-button');
-            const textSpan = button.querySelector('.custom-dropdown-text');
-            const options = dropdown.querySelector('.custom-dropdown-options');
-
-            // Update button text
-            if (items.length > 0 && selectedIndex >= 0 && selectedIndex < items.length) {
-                textSpan.textContent = items[selectedIndex];
-            } else {
-                textSpan.textContent = 'Select Room';
-            }
-
-            // Update options
-            options.innerHTML = '';
-            items.forEach((item, index) => {
-                const option = document.createElement('div');
-                option.className = 'custom-dropdown-option';
-                option.dataset.index = index;
-                
-                // Add status indicator
-                const indicator = document.createElement('div');
-                const status = getRoomStatus(item);
-                indicator.className = `status-symbol ${status}`;
-                option.appendChild(indicator);
-                
-                const text = document.createElement('span');
-                text.textContent = item;
-                option.appendChild(text);
-                
-                if (index === selectedIndex) {
-                    option.classList.add('selected');
-                }
-                
-                options.appendChild(option);
-            });
+        function showResetModal() {
+            resetModal.classList.add('active');
         }
 
-        // Room navigation functions
-        function navigateRoom(direction) {
-            const newIndex = appState.currentRoomIndex + direction;
-            
-            if (newIndex >= 0 && newIndex < appState.rooms.length) {
-                appState.currentRoomIndex = newIndex;
-                updateCheckPage();
-                updateCheckStates();
-                saveDataToStorage();
-            } else if (newIndex >= appState.rooms.length) {
-                // Completed all rooms
-                showCompletionPage();
-            }
+        function hideResetModal() {
+            resetModal.classList.remove('active');
         }
 
-        function navigateCodeRoom(direction) {
-            const roomNames = Object.keys(appState.roomCodes);
-            const newIndex = appState.currentCodeRoomIndex + direction;
-            
-            if (newIndex >= 0 && newIndex < roomNames.length) {
-                appState.currentCodeRoomIndex = newIndex;
-                updateCodeCheckPage();
-                generateCodeCheckItems();
-                updateCodeCheckStates();
-                saveDataToStorage();
-            } else if (newIndex >= roomNames.length) {
-                // Completed all rooms
-                showCompletionPage();
-            }
+        function showFileUploadModal() {
+            fileUploadModal.classList.add('active');
+            jsonFileInput.value = '';
+            fileName.textContent = '';
+            uploadJsonFileButton.disabled = true;
         }
 
-        function navigateSeStSvRoom(direction) {
-            const newIndex = appState.currentSeStSvRoomIndex + direction;
-            
-            if (newIndex >= 0 && newIndex < appState.seStSvRooms.length) {
-                appState.currentSeStSvRoomIndex = newIndex;
-                updateSeStSvPage();
-                generateSeStSvEntries();
-                saveDataToStorage();
-            } else if (newIndex >= appState.seStSvRooms.length) {
-                // Completed all rooms
-                showCompletionPage();
-            }
+        function hideFileUploadModal() {
+            fileUploadModal.classList.remove('active');
         }
 
-        // Data persistence functions
-        function saveDataToStorage() {
-            try {
-                localStorage.setItem('roomInspectionApp', JSON.stringify(appState));
-            } catch (error) {
-                console.error('Failed to save data:', error);
-            }
+        function showMessageModal(title, content) {
+            messageModalTitle.textContent = title;
+            messageModalContent.textContent = content;
+            messageModal.classList.add('active');
         }
 
-        function loadDataFromStorage() {
-            try {
-                const saved = localStorage.getItem('roomInspectionApp');
-                if (saved) {
-                    const parsedData = JSON.parse(saved);
-                    appState = { ...appState, ...parsedData };
-                }
-            } catch (error) {
-                console.error('Failed to load data:', error);
-            }
+        function hideMessageModal() {
+            messageModal.classList.remove('active');
         }
 
+        // Refresh UI based on current state
         function refreshUIFromState() {
+            if (appState.isInspectionMode) {
+                if (appState.mode === 'site' && appState.rooms.length > 0) {
+                    generateCheckItems();
+                    showCheckPage();
+                    updateCheckPage();
+                    updateCheckStates();
+                } else if (appState.mode === 'code' && Object.keys(appState.roomCodes).length > 0) {
+                    generateCodeCheckItems();
+                    showCodeCheckPage();
+                    updateCodeCheckPage();
+                    updateCodeCheckStates();
+                } else if (appState.mode === 'seststv' && appState.seStSvRooms.length > 0) {
+                    showRoomSeStSvCheckPage();
+                    updateSeStSvPage();
+                    generateSeStSvEntries();
+                }
+            } else {
+                if (appState.mode === 'site') {
+                    showRoomInputPage();
+                } else if (appState.mode === 'code') {
+                    showCodeInputPage();
+                } else if (appState.mode === 'seststv') {
+                    showRoomSeStSvInputPage();
+                } else {
+                    showMainMenuPage();
+                }
+            }
+
+            // Update text areas with saved data
             if (appState.rooms.length > 0) {
                 roomListTextarea.value = appState.rooms.join('\n');
-                generateCheckItems();
-                showCheckPage();
-                updateCheckPage();
-                updateCheckStates();
-            } else if (Object.keys(appState.roomCodes).length > 0) {
-                // Reconstruct code list textarea
+            }
+            if (Object.keys(appState.roomCodes).length > 0) {
+                // Reconstruct the code list format
                 let codeText = '';
                 for (const room in appState.roomCodes) {
                     if (appState.roomCodes[room].length > 0) {
                         codeText += `${room}- ${appState.roomCodes[room].join(' ')}\n`;
                     }
                 }
-                codeListTextarea.value = codeText;
-                generateCodeCheckItems();
-                showCodeCheckPage();
-                updateCodeCheckPage();
-                updateCodeCheckStates();
-            } else if (appState.seStSvRooms.length > 0) {
+                codeListTextarea.value = codeText.trim();
+            }
+            if (appState.seStSvRooms.length > 0) {
                 roomNumbersTextarea.value = appState.seStSvRooms.join('\n');
-                showRoomSeStSvCheckPage();
-                updateSeStSvPage();
-                generateSeStSvEntries();
             }
-        }
 
-        // Update check page
-        function updateCheckPage() {
-            if (appState.rooms.length === 0) return;
-            
-            const currentRoom = appState.rooms[appState.currentRoomIndex];
-            document.getElementById('currentRoomTitle').textContent = currentRoom;
-            
-            // Update progress info
-            document.getElementById('progressInfo').textContent = 
-                `Room ${appState.currentRoomIndex + 1} of ${appState.rooms.length}`;
-            
-            // Update progress bar
-            const progressPercent = ((appState.currentRoomIndex + 1) / appState.rooms.length) * 100;
-            document.getElementById('progressFill').style.width = `${progressPercent}%`;
-            
-            // Update room selector
-            updateRoomSelector();
-            
-            // Update room select color based on status
-            updateRoomSelectColor();
-            
-            // Update navigation buttons
-            const prevBtn = document.getElementById('prevRoom');
-            const nextBtn = document.getElementById('nextRoom');
-            
-            prevBtn.disabled = appState.currentRoomIndex === 0;
-            
-            if (appState.currentRoomIndex === appState.rooms.length - 1) {
-                nextBtn.textContent = 'Complete';
+            // Update dropdown options to reflect current data
+            if (appState.rooms.length > 0) {
+                updateCustomDropdownOptions('roomSelect', appState.rooms, appState.currentRoomIndex);
+                updateRoomSelectColor();
             } else {
-                nextBtn.textContent = 'Next Room';
+                updateCustomDropdownOptions('roomSelect', [], 0);
+                document.querySelector("#roomSelect .custom-dropdown-text").textContent = "Select Room";
+                updateCustomDropdownColor('roomSelect', 'default');
             }
-        }
 
-        function updateRoomSelector() {
-            updateCustomDropdownOptions('roomSelect', appState.rooms, appState.currentRoomIndex);
-        }
-
-        // Update code check page
-        function updateCodeCheckPage() {
-            const roomNames = Object.keys(appState.roomCodes);
-            if (roomNames.length === 0) return;
-            
-            const currentRoom = roomNames[appState.currentCodeRoomIndex];
-            document.getElementById('currentCodeRoomTitle').textContent = `Room: ${currentRoom}`;
-            
-            // Update progress info
-            document.getElementById('codeProgressInfo').textContent = 
-                `Room ${appState.currentCodeRoomIndex + 1} of ${roomNames.length}`;
-            
-            // Update progress bar
-            const progressPercent = ((appState.currentCodeRoomIndex + 1) / roomNames.length) * 100;
-            document.getElementById('codeProgressFill').style.width = `${progressPercent}%`;
-            
-            // Update room selector
-            updateCodeRoomSelector();
-            
-            // Update room select color based on status
-            updateCodeRoomSelectColor();
-            
-            // Update navigation buttons
-            const prevBtn = document.getElementById('prevCodeRoom');
-            const nextBtn = document.getElementById('nextCodeRoom');
-            
-            prevBtn.disabled = appState.currentCodeRoomIndex === 0;
-            
-            if (appState.currentCodeRoomIndex === roomNames.length - 1) {
-                nextBtn.textContent = 'Complete';
+            if (Object.keys(appState.roomCodes).length > 0) {
+                const roomNames = Object.keys(appState.roomCodes);
+                updateCustomDropdownOptions('codeRoomSelect', roomNames, appState.currentCodeRoomIndex);
+                updateCodeRoomSelectColor();
             } else {
-                nextBtn.textContent = 'Next Room';
+                updateCustomDropdownOptions('codeRoomSelect', [], 0);
+                document.querySelector("#codeRoomSelect .custom-dropdown-text").textContent = "Select Room";
+                updateCustomDropdownColor('codeRoomSelect', 'default');
+            }
+
+            if (appState.seStSvRooms.length > 0) {
+                updateCustomDropdownOptions('seStSvRoomSelect', appState.seStSvRooms, appState.currentSeStSvRoomIndex);
+                updateSeStSvRoomSelectColor();
+            } else {
+                updateCustomDropdownOptions('seStSvRoomSelect', [], 0);
+                document.querySelector("#seStSvRoomSelect .custom-dropdown-text").textContent = "Select Room";
+                updateCustomDropdownColor('seStSvRoomSelect', 'default');
             }
         }
 
-        function updateCodeRoomSelector() {
-            const roomNames = Object.keys(appState.roomCodes);
-            updateCustomDropdownOptions('codeRoomSelect', roomNames, appState.currentCodeRoomIndex);
+        // Room select change handlers
+        function handleRoomSelectChange(event) {
+            appState.currentRoomIndex = parseInt(event.target.value);
+            saveDataToStorage();
+            updateCheckPage();
+            generateCheckItems();
+            updateCheckStates();
         }
 
-        // Update check button states for site inspection
-        function updateCheckStates() {
-            const currentRoom = appState.rooms[appState.currentRoomIndex];
-            const roomData = appState.checkData[currentRoom] || new Array(checkLabels.length).fill(null);
+        function handleCodeRoomSelectChange(event) {
+            appState.currentCodeRoomIndex = parseInt(event.target.value);
+            saveDataToStorage();
+            generateCodeCheckItems();
+            updateCodeCheckPage();
+            updateCodeCheckStates();
+        }
 
-            roomData.forEach((value, index) => {
-                const checkButtons = document.querySelectorAll(`[data-check="${index}"]`);
-                
-                checkButtons.forEach(btn => {
-                    if (btn.tagName === 'BUTTON') {
-                        btn.classList.remove('active');
-                        if (value !== null && parseInt(btn.dataset.value) === value) {
-                            btn.classList.add('active');
-                        }
-                    } else if (btn.tagName === 'TEXTAREA') {
-                        btn.value = value || '';
-                    }
-                });
+        // Custom dropdown functionality
+        function initCustomDropdown(dropdownId, onSelect) {
+            const dropdown = document.getElementById(dropdownId);
+            const button = dropdown.querySelector('.custom-dropdown-button');
+            const options = dropdown.querySelector('.custom-dropdown-options');
+            const text = dropdown.querySelector('.custom-dropdown-text');
+
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeAllDropdowns();
+                options.classList.toggle('show');
+                button.classList.toggle('open');
             });
 
-            // Update check item backgrounds
-            document.querySelectorAll('.check-item').forEach((item, index) => {
-                const value = roomData[index];
-                if (value === 1) {
-                    item.classList.add('checked');
-                } else {
-                    item.classList.remove('checked');
+            dropdown.addEventListener('click', (e) => {
+                // Handle clicks on option or its children (status indicator + text)
+                let optionElement = e.target;
+                if (!optionElement.classList.contains('custom-dropdown-option')) {
+                    optionElement = optionElement.closest('.custom-dropdown-option');
                 }
+                
+                if (optionElement && optionElement.classList.contains('custom-dropdown-option')) {
+                    const selectedIndex = parseInt(optionElement.dataset.index);
+                    const selectedText = optionElement.querySelector('span').textContent;
+                    text.textContent = selectedText;
+                    options.classList.remove('show');
+                    button.classList.remove('open');
+                    onSelect(selectedIndex);
+                }
+            });
+
+            return { button, options, text };
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.custom-dropdown-options').forEach(options => {
+                options.classList.remove('show');
+            });
+            document.querySelectorAll('.custom-dropdown-button').forEach(button => {
+                button.classList.remove('open');
+            });
+        }
+
+        function updateCustomDropdownOptions(dropdownId, optionsArray, selectedIndex = 0) {
+            const dropdown = document.getElementById(dropdownId);
+            const options = dropdown.querySelector('.custom-dropdown-options');
+            const text = dropdown.querySelector('.custom-dropdown-text');
+            
+            options.innerHTML = '';
+            optionsArray.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'custom-dropdown-option';
+                optionDiv.dataset.index = index;
+                
+                // Create status indicator
+                const statusIndicator = document.createElement('div');
+                const roomStatus = getRoomStatus(option);
+                statusIndicator.className = 'status-symbol ' + roomStatus;
+                
+                // Add room name
+                const roomName = document.createElement('span');
+                roomName.textContent = option;
+                
+                optionDiv.appendChild(statusIndicator);
+                optionDiv.appendChild(roomName);
+                
+                if (index === selectedIndex) {
+                    optionDiv.classList.add('selected');
+                    text.textContent = option;
+                }
+                options.appendChild(optionDiv);
             });
         }
 
@@ -2283,7 +2254,7 @@ Room Codes (Room- Codes)
             });
         }
 
-        // Generate check items for code inspection (Excel-like layout) with enhanced comment section
+        // Generate check items for code inspection (Excel-like layout)
         function generateCodeCheckItems() {
             const checksContainer = document.getElementById('codeChecksContainer');
             // Clear only rows, keep headers
@@ -2329,113 +2300,19 @@ Room Codes (Room- Codes)
                 statusCell.appendChild(statusOptionsDiv);
                 rowDiv.appendChild(statusCell);
 
-                // Enhanced Comment Cell with Predefined Choices
+                // Comment Cell
                 const commentCell = document.createElement('div');
                 commentCell.className = 'grid-cell';
-                
-                const commentSection = document.createElement('div');
-                commentSection.className = 'comment-section';
-
-                // Create dropdown select element
-                const commentSelect = document.createElement('select');
-                commentSelect.className = 'comment-textarea';
-                commentSelect.dataset.codeId = uniqueCodeId;
-                commentSelect.style.minHeight = '38px';
-                commentSelect.style.cursor = 'pointer';
-                
-                // Add default option
-                const defaultOption = document.createElement('option');
-                defaultOption.value = '';
-                defaultOption.textContent = 'Select a comment...';
-                defaultOption.disabled = true;
-                defaultOption.selected = true;
-                commentSelect.appendChild(defaultOption);
-                
-                // Add comment choices as options
-                commentChoices.forEach((choice) => {
-                    const option = document.createElement('option');
-                    option.value = choice;
-                    option.textContent = choice;
-                    commentSelect.appendChild(option);
-                });
-                
-                commentSelect.addEventListener('change', function(event) {
-                    const codeId = event.target.dataset.codeId;
-                    const selectedValue = event.target.value;
-                    appState.codeSpecificComments[codeId] = selectedValue;
-                    saveDataToStorage();
-                });
-                
-                commentSection.appendChild(commentSelect);
-
-                commentCell.appendChild(commentSection);
+                const commentTextarea = document.createElement('textarea');
+                commentTextarea.className = 'comment-textarea';
+                commentTextarea.placeholder = 'Add comment...';
+                commentTextarea.dataset.codeId = uniqueCodeId;
+                commentTextarea.addEventListener('input', handleCodeCommentInput);
+                commentCell.appendChild(commentTextarea);
                 rowDiv.appendChild(commentCell);
 
                 checksContainer.appendChild(rowDiv);
             });
-        }
-
-        // Handle predefined comment choice selection
-        function selectCommentChoice(event) {
-            event.preventDefault();
-            const codeId = event.target.dataset.codeId;
-            const choice = event.target.dataset.choice;
-            
-            // Find the textarea for this code
-            const textarea = document.querySelector(`.comment-textarea[data-code-id="${codeId}"]`);
-            if (textarea) {
-                // Check if choice is already in the textarea
-                const currentValue = textarea.value.trim();
-                const choices = currentValue.split('\n').map(line => line.trim()).filter(line => line);
-                
-                // Toggle the choice
-                const choiceIndex = choices.indexOf(choice);
-                if (choiceIndex > -1) {
-                    // Remove the choice
-                    choices.splice(choiceIndex, 1);
-                    event.target.classList.remove('selected');
-                } else {
-                    // Add the choice
-                    choices.push(choice);
-                    event.target.classList.add('selected');
-                }
-                
-                // Update textarea value
-                textarea.value = choices.join('\n');
-                
-                // Update app state
-                appState.codeSpecificComments[codeId] = textarea.value;
-                saveDataToStorage();
-            }
-            
-            // Update button visual state
-            updateCommentChoiceButtons(codeId);
-        }
-
-        // Update visual state of comment choice buttons
-        function updateCommentChoiceButtons(codeId) {
-            const textarea = document.querySelector(`.comment-textarea[data-code-id="${codeId}"]`);
-            const choiceButtons = document.querySelectorAll(`.comment-choice-btn[data-code-id="${codeId}"]`);
-            
-            if (textarea && choiceButtons.length > 0) {
-                const currentValue = textarea.value.trim();
-                const selectedChoices = currentValue.split('\n').map(line => line.trim()).filter(line => line);
-                
-                choiceButtons.forEach(btn => {
-                    const choice = btn.dataset.choice;
-                    if (selectedChoices.includes(choice)) {
-                        btn.classList.add('selected');
-                    } else {
-                        btn.classList.remove('selected');
-                    }
-                });
-            }
-        }
-
-        // Helper function to check if a code is a whole room number
-        function isWholeRoomNumber(code) {
-            // Check if the code contains 'SE', 'ST', or 'SV' which indicates it's a whole room number
-            return code.includes('SE') || code.includes('ST') || code.includes('SV');
         }
 
         // Event handlers
@@ -2471,9 +2348,6 @@ Room Codes (Room- Codes)
             const value = event.target.value;
             appState.codeSpecificComments[codeId] = value;
             saveDataToStorage();
-            
-            // Update choice button states
-            updateCommentChoiceButtons(codeId);
         }
 
         function toggleStatusOptions(event) {
@@ -2532,7 +2406,8 @@ Room Codes (Room- Codes)
                 appState.roomStatus[currentRoom] = status;
                 saveDataToStorage();
                 updateCodeRoomSelectColor();
-                updateCustomDropdownOptions('codeRoomSelect', Object.keys(appState.roomCodes), appState.currentCodeRoomIndex);
+                const roomNames = Object.keys(appState.roomCodes);
+                updateCustomDropdownOptions('codeRoomSelect', roomNames, appState.currentCodeRoomIndex);
             }
         }
 
@@ -2544,6 +2419,94 @@ Room Codes (Room- Codes)
                 updateSeStSvRoomSelectColor();
                 updateCustomDropdownOptions('seStSvRoomSelect', appState.seStSvRooms, appState.currentSeStSvRoomIndex);
             }
+        }
+
+        // Update check page for site inspection
+        function updateCheckPage() {
+            if (appState.rooms.length === 0) return;
+            
+            const currentRoom = appState.rooms[appState.currentRoomIndex];
+            document.getElementById('currentRoomTitle').textContent = currentRoom;
+            document.getElementById('progressInfo').textContent = `Room ${appState.currentRoomIndex + 1} of ${appState.rooms.length}`;
+            
+            const progressPercent = ((appState.currentRoomIndex + 1) / appState.rooms.length) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+
+            // Update room select dropdown
+            updateCustomDropdownOptions('roomSelect', appState.rooms, appState.currentRoomIndex);
+
+            // Update room select color based on status
+            updateRoomSelectColor();
+
+            // Update navigation buttons
+            document.getElementById('prevRoom').disabled = appState.currentRoomIndex === 0;
+            const nextBtn = document.getElementById('nextRoom');
+            if (appState.currentRoomIndex === appState.rooms.length - 1) {
+                nextBtn.textContent = 'Complete Inspection';
+            } else {
+                nextBtn.textContent = 'Next Room';
+            }
+        }
+
+        // Update code check page for code inspection
+        function updateCodeCheckPage() {
+            const roomNames = Object.keys(appState.roomCodes);
+            if (roomNames.length === 0) return;
+            
+            const currentRoomName = roomNames[appState.currentCodeRoomIndex];
+            document.getElementById('currentCodeRoomTitle').textContent = `Room: ${currentRoomName}`;
+            document.getElementById('codeProgressInfo').textContent = `Room ${appState.currentCodeRoomIndex + 1} of ${roomNames.length}`;
+            
+            const progressPercent = ((appState.currentCodeRoomIndex + 1) / roomNames.length) * 100;
+            document.getElementById('codeProgressFill').style.width = progressPercent + '%';
+
+            // Update room select dropdown
+            updateCustomDropdownOptions('codeRoomSelect', roomNames, appState.currentCodeRoomIndex);
+
+            // Update room select color based on status
+            updateCodeRoomSelectColor();
+
+            // Update navigation buttons
+            document.getElementById('prevCodeRoom').disabled = appState.currentCodeRoomIndex === 0;
+            const nextBtn = document.getElementById('nextCodeRoom');
+            if (appState.currentCodeRoomIndex === roomNames.length - 1) {
+                nextBtn.textContent = 'Complete Inspection';
+            } else {
+                nextBtn.textContent = 'Next Room';
+            }
+        }
+
+        // Update check button states for site inspection
+        function updateCheckStates() {
+            const currentRoom = appState.rooms[appState.currentRoomIndex];
+            const roomData = appState.checkData[currentRoom] || new Array(checkLabels.length).fill(null);
+
+            document.querySelectorAll('#checksContainer .check-item').forEach((item) => {
+                const buttons = item.querySelectorAll('.check-btn');
+                const textarea = item.querySelector('textarea[data-check]');
+                const checkIndexElement = item.querySelector('[data-check]');
+                if (!checkIndexElement) return;
+                const checkIndex = parseInt(checkIndexElement.dataset.check); 
+
+                if (textarea) {
+                    textarea.value = roomData[checkIndex] || '';
+                } else {
+                    buttons.forEach(btn => {
+                        const value = parseInt(btn.dataset.value);
+                        if (roomData[checkIndex] === value) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+
+                    if (roomData[checkIndex] === 1 || roomData[checkIndex] === 0) {
+                        item.classList.add('checked');
+                    } else {
+                        item.classList.remove('checked');
+                    }
+                }
+            });
         }
 
         // Update code check button states and comments for code inspection
@@ -2572,8 +2535,6 @@ Room Codes (Room- Codes)
                 const commentTextarea = document.querySelector(`.comment-textarea[data-code-id="${uniqueCodeId}"]`);
                 if (commentTextarea) {
                     commentTextarea.value = comment;
-                    // Update choice button states
-                    updateCommentChoiceButtons(uniqueCodeId);
                 }
             });
         }
@@ -2802,10 +2763,10 @@ Room Codes (Room- Codes)
                     appState.roomCodes[roomName].forEach(code => {
                         const uniqueCodeId = `${roomName}-${code}`;
                         const statusIndex = appState.checkData[uniqueCodeId];
-                        const status = statusIndex !== null && statusIndex !== undefined ? codeStatusOptions[statusIndex] : '';
-                        const comment = appState.codeSpecificComments[uniqueCodeId] || '';
+                        const statusText = statusIndex !== null ? codeStatusOptions[statusIndex] : 'Not Inspected';
+                        const commentText = appState.codeSpecificComments[uniqueCodeId] || '';
                         
-                        const rowData = [roomName, code, status, comment];
+                        const rowData = [roomName, code, statusText, commentText];
                         // Add data rows, ensuring proper CSV escaping
                         csvRows.push(rowData.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','));
                     });
@@ -2819,105 +2780,132 @@ Room Codes (Room- Codes)
             }
         }
 
-        function downloadCsvFile(content, filename) {
+        function downloadCsvFile(content, fileName) {
             const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            link.setAttribute('href', url);
-            link.setAttribute('download', filename);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-            showMessageModal('Export Successful', 'Data exported successfully!');
-        }
-
-        // Modal functions
-        function showResetModal(type) {
-            document.getElementById('resetModal').classList.add('active');
-            document.getElementById('resetModal').dataset.type = type;
-        }
-
-        function hideResetModal() {
-            document.getElementById('resetModal').classList.remove('active');
-        }
-
-        function confirmReset() {
-            const type = document.getElementById('resetModal').dataset.type;
             
-            if (type === 'site') {
-                appState.rooms = [];
-                appState.checkData = {};
-                appState.roomStatus = {};
-                roomListTextarea.value = '';
-            } else if (type === 'code') {
-                appState.roomCodes = {};
-                appState.codeSpecificComments = {};
-                codeListTextarea.value = '';
-            } else if (type === 'seStSv') {
-                appState.seStSvRooms = [];
-                appState.seStSvData = {};
-                roomNumbersTextarea.value = '';
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', fileName);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showMessageModal('Export Successful', 'Data exported successfully! The file can be opened in Excel or any spreadsheet application.');
+            } else {
+                showMessageModal('Browser Not Supported', 'Your browser does not support file downloads.');
             }
-            
-            appState.currentRoomIndex = 0;
-            appState.currentCodeRoomIndex = 0;
-            appState.currentSeStSvRoomIndex = 0;
-            appState.isInspectionMode = false;
-            
+        }
+
+        function resetApplication() {
             localStorage.removeItem('roomInspectionApp');
-            hideResetModal();
-            showMainMenu();
-            showMessageModal('Reset Complete', 'Application has been reset successfully.');
-        }
-
-        function showFileUploadModal(type) {
-            document.getElementById('fileUploadModal').classList.add('active');
-            document.getElementById('fileUploadModal').dataset.type = type;
-            document.getElementById('fileName').textContent = '';
-            document.getElementById('jsonFileInput').value = '';
-        }
-
-        function hideFileUploadModal() {
-            document.getElementById('fileUploadModal').classList.remove('active');
-        }
-
-        function uploadFile() {
-            const fileInput = document.getElementById('jsonFileInput');
-            const file = fileInput.files[0];
-            
-            if (!file) {
-                showMessageModal('No File Selected', 'Please select a JSON file to upload.');
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    appState = { ...appState, ...data };
-                    saveDataToStorage();
-                    hideFileUploadModal();
-                    refreshUIFromState();
-                    showMessageModal('Upload Successful', 'Data uploaded and loaded successfully!');
-                } catch (error) {
-                    console.error('Upload failed:', error);
-                    showMessageModal('Upload Failed', 'Invalid JSON file. Please check the file format.');
-                }
+            appState = {
+                mode: 'site',
+                rooms: [],
+                roomCodes: {},
+                roomNumber: '',
+                seStSvEntries: {
+                    'SE': [],
+                    'ST': [],
+                    'SV': []
+                },
+                seStSvRooms: [],
+                currentSeStSvRoomIndex: 0,
+                seStSvData: {},
+                currentRoomIndex: 0,
+                currentCodeRoomIndex: 0,
+                checkData: {},
+                codeSpecificComments: {},
+                isInspectionMode: false,
+                roomStatus: {}
             };
-            reader.readAsText(file);
+            // Clear the text areas when resetting the application
+            roomListTextarea.value = '';
+            codeListTextarea.value = '';
+            roomNumbersTextarea.value = '';
+            hideResetModal();
+            showMainMenuPage();
+            
+            // Use refreshUIFromState to ensure all UI elements are properly updated
+            refreshUIFromState();
         }
 
-        function showMessageModal(title, message) {
-            document.getElementById('messageTitle').textContent = title;
-            document.getElementById('messageContent').textContent = message;
-            document.getElementById('messageModal').classList.add('active');
+        // Storage functions
+        function saveDataToStorage() {
+            localStorage.setItem('roomInspectionApp', JSON.stringify(appState));
         }
 
-        function hideMessageModal() {
-            document.getElementById('messageModal').classList.remove('active');
+        function loadDataFromStorage() {
+            const saved = localStorage.getItem('roomInspectionApp');
+            if (saved) {
+                const savedState = JSON.parse(saved);
+                // Merge saved state with default appState, ensuring new properties are not lost
+                appState = { ...appState, ...savedState };
+            }
         }
+
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
+
 </body>
 </html>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // SE/ST/SV Code Counter functionality
+        const seTextarea = document.getElementById('seTextarea');
+        const stTextarea = document.getElementById('stTextarea');
+        const svTextarea = document.getElementById('svTextarea');
+        const seCount = document.getElementById('seCount');
+        const stCount = document.getElementById('stCount');
+        const svCount = document.getElementById('svCount');
+
+        function updateCounter(textarea, counter) {
+            if (!textarea || !counter) return;
+            
+            const lines = textarea.value.split('\n').filter(line => line.trim() !== '');
+            const count = lines.length;
+            counter.textContent = count;
+            
+            // Show/hide counter based on content
+            if (count > 0) {
+                counter.style.display = 'block';
+            } else {
+                counter.style.display = 'none';
+            }
+        }
+
+        function setupCounter(textarea, counter) {
+            if (!textarea || !counter) return;
+            
+            textarea.addEventListener('input', () => updateCounter(textarea, counter));
+            textarea.addEventListener('focus', () => updateCounter(textarea, counter));
+            textarea.addEventListener('blur', () => updateCounter(textarea, counter));
+            
+            // Initial update
+            updateCounter(textarea, counter);
+        }
+
+        // Setup counters for all textareas
+        setupCounter(seTextarea, seCount);
+        setupCounter(stTextarea, stCount);
+        setupCounter(svTextarea, svCount);
+
+        // Global functions for external access
+        window.updateSeStSvCounters = function() {
+            updateCounter(seTextarea, seCount);
+            updateCounter(stTextarea, stCount);
+            updateCounter(svTextarea, svCount);
+        };
+
+        window.resetSeStSvCounters = function() {
+            if (seCount) seCount.style.display = 'none';
+            if (stCount) stCount.style.display = 'none';
+            if (svCount) svCount.style.display = 'none';
+        };
+    });
+</script>
