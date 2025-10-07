@@ -587,9 +587,61 @@
             border-bottom: none; /* Remove bottom border for last row */
         }
 
-        /* The new status select element will reuse .comment-textarea styles */
+        .status-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            /* iOS touch optimization */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
 
+        .status-button:hover {
+            background: #5a6cdb;
+        }
 
+        .status-button.selected {
+            background: #28a745;
+        }
+
+        .status-options {
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10;
+            display: none;
+            flex-direction: column;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .status-options.active {
+            display: flex;
+        }
+
+        .status-option {
+            padding: 10px 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            /* iOS touch optimization */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .status-option:hover {
+            background-color: #f0f0f0;
+        }
 
         /* Enhanced Comment Section with Predefined Choices */
         .comment-section {
@@ -2272,40 +2324,29 @@ Room Codes (Room- Codes)
                 codeCell.textContent = code;
                 rowDiv.appendChild(codeCell);
 
-                // Status Select Element
+                // Status Button Cell
                 const statusCell = document.createElement('div');
                 statusCell.className = 'grid-cell';
-                
-                const statusSelect = document.createElement('select');
-                statusSelect.className = 'comment-textarea'; // Reusing comment-textarea class for styling
-                statusSelect.dataset.codeId = uniqueCodeId;
-                statusSelect.style.minHeight = '38px';
-                statusSelect.style.cursor = 'pointer';
-                
-                // Add default option
-                const defaultStatusOption = document.createElement('option');
-                defaultStatusOption.value = '';
-                defaultStatusOption.textContent = 'Select Status...';
-                defaultStatusOption.disabled = true;
-                defaultStatusOption.selected = true;
-                statusSelect.appendChild(defaultStatusOption);
-                
-                // Add status options
+                const statusButton = document.createElement('button');
+                statusButton.className = 'status-button';
+                statusButton.textContent = 'Select Status';
+                statusButton.dataset.codeId = uniqueCodeId;
+                statusButton.addEventListener('click', toggleStatusOptions);
+                statusCell.appendChild(statusButton);
+
+                const statusOptionsDiv = document.createElement('div');
+                statusOptionsDiv.className = 'status-options';
+                statusOptionsDiv.dataset.codeId = uniqueCodeId;
                 codeStatusOptions.forEach((option, optionIndex) => {
-                    const opt = document.createElement('option');
-                    opt.value = optionIndex;
-                    opt.textContent = option;
-                    statusSelect.appendChild(opt);
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'status-option';
+                    optionDiv.textContent = option;
+                    optionDiv.dataset.codeId = uniqueCodeId;
+                    optionDiv.dataset.statusIndex = optionIndex;
+                    optionDiv.addEventListener('click', selectCodeStatus);
+                    statusOptionsDiv.appendChild(optionDiv);
                 });
-                
-                statusSelect.addEventListener('change', function(event) {
-                    const codeId = event.target.dataset.codeId;
-                    const selectedIndex = parseInt(event.target.value);
-                    appState.checkData[codeId] = selectedIndex;
-                    saveDataToStorage();
-                });
-                
-                statusCell.appendChild(statusSelect);
+                statusCell.appendChild(statusOptionsDiv);
                 rowDiv.appendChild(statusCell);
 
                 // Enhanced Comment Cell with Predefined Choices
@@ -2455,9 +2496,44 @@ Room Codes (Room- Codes)
             updateCommentChoiceButtons(codeId);
         }
 
+        function toggleStatusOptions(event) {
+            event.stopPropagation();
+            const codeId = event.target.dataset.codeId;
+            const statusOptions = document.querySelector(`.status-options[data-code-id="${codeId}"]`);
+            
+            // Close all other status options
+            document.querySelectorAll('.status-options').forEach(options => {
+                if (options !== statusOptions) {
+                    options.classList.remove('active');
+                }
+            });
+            
+            statusOptions.classList.toggle('active');
+        }
 
+        function selectCodeStatus(event) {
+            const codeId = event.target.dataset.codeId;
+            const statusIndex = parseInt(event.target.dataset.statusIndex);
+            const statusText = event.target.textContent;
+            
+            appState.checkData[codeId] = statusIndex;
+            
+            const statusButton = document.querySelector(`.status-button[data-code-id="${codeId}"]`);
+            statusButton.textContent = statusText;
+            statusButton.classList.add('selected');
+            
+            const statusOptions = document.querySelector(`.status-options[data-code-id="${codeId}"]`);
+            statusOptions.classList.remove('active');
+            
+            saveDataToStorage();
+        }
 
-
+        // Close status options when clicking outside
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.status-options').forEach(options => {
+                options.classList.remove('active');
+            });
+        });
 
         // Room status functions
         function setRoomStatus(status) {
@@ -2500,13 +2576,15 @@ Room Codes (Room- Codes)
                 const statusIndex = appState.checkData[uniqueCodeId];
                 const comment = appState.codeSpecificComments[uniqueCodeId] || '';
 
-                // Update status select
-                const statusSelect = document.querySelector(`select[data-code-id="${uniqueCodeId}"]`);
-                if (statusSelect) {
+                // Update status button
+                const statusButton = document.querySelector(`.status-button[data-code-id="${uniqueCodeId}"]`);
+                if (statusButton) {
                     if (statusIndex !== null && statusIndex !== undefined) {
-                        statusSelect.value = statusIndex;
+                        statusButton.textContent = codeStatusOptions[statusIndex];
+                        statusButton.classList.add('selected');
                     } else {
-                        statusSelect.value = ''; // Set to default option
+                        statusButton.textContent = 'Select Status';
+                        statusButton.classList.remove('selected');
                     }
                 }
 
