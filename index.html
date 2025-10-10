@@ -541,76 +541,122 @@
         }
         
         .code-inspection-grid {
-            display: grid;
-            grid-template-columns: 1fr 150px 250px; /* Code | Status Button | Comment */
-            gap: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             margin-bottom: 30px;
-            border: 1px solid #e1e5e9;
-            border-radius: 10px;
-            overflow: hidden;
         }
 
         .grid-header {
-            font-weight: 700;
-            background-color: #f0f2f5;
-            padding: 10px;
-            border-bottom: 1px solid #e1e5e9;
-            text-align: center;
+            display: none; /* Hide headers in card layout */
         }
 
         .grid-row {
-            display: contents; /* Allows children to be placed directly in grid */
+            background: #ffffff;
+            border: 1px solid #e1e5e9;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .grid-cell {
-            padding: 10px;
-            border-bottom: 1px solid #e1e5e9;
+            padding: 0;
+            border: none;
             display: flex;
-            align-items: center;
-            word-break: break-all;
+            flex-direction: column;
+            gap: 6px;
         }
 
-        .grid-cell:nth-child(3n+1) { /* Code column */
-            background-color: #fdfdfd;
+        .grid-cell.code-cell {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1C1C1E;
+            letter-spacing: -0.3px;
         }
 
-        .grid-cell:nth-child(3n+2) { /* Status button column */
-            background-color: #f8f8f8;
-            justify-content: center;
+        .grid-cell.controls-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .grid-cell:nth-child(3n) { /* Comment column */
-            background-color: #fdfdfd;
+        .controls-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
         }
 
-        .grid-row:last-child .grid-cell {
-            border-bottom: none; /* Remove bottom border for last row */
+        .control-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .control-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #8E8E93;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
         }
 
         .status-button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            width: 100%;
+            height: 44px;
+            padding: 0 12px;
+            font-size: 16px;
+            font-weight: 400;
+            color: #1C1C1E;
+            background-color: #F8F9FA;
+            border: 1px solid #D1D1D6;
+            border-radius: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             cursor: pointer;
             transition: all 0.2s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            text-align: left;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 100%;
             /* iOS touch optimization */
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            position: relative;
         }
 
-        .status-button:hover {
-            background: #5a6cdb;
+        .status-button::after {
+            content: '▼';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #8E8E93;
+        }
+
+        .status-button:focus {
+            outline: none;
+            border-color: #007AFF;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        .status-button:active {
+            background-color: #FFFFFF;
+            border-color: #007AFF;
         }
 
         .status-button.selected {
-            background: #28a745;
+            background-color: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
         }
 
         .status-options {
@@ -685,23 +731,65 @@
 
         .comment-textarea {
             width: 100%;
-            min-height: 38px; /* Adjusted for single line */
-            padding: 8px;
-            border: 1px solid #e1e5e9;
-            border-radius: 6px;
-            font-size: 14px;
-            font-family: inherit;
+            height: 44px;
+            padding: 0 12px;
+            padding-right: 30px;
+            border: 1px solid #D1D1D6;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            resize: none;
+            box-sizing: border-box;
+            background-color: #F8F9FA;
+            color: #1C1C1E;
+            transition: all 0.2s ease;
+            /* iOS optimizations */
+            -webkit-appearance: none;
+            appearance: none;
+            line-height: 44px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        .comment-textarea:focus {
+            outline: none;
+            border-color: #007AFF;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        /* Custom input field for manual comment entry */
+        .custom-comment-input {
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 12px;
+            border: 1px solid #D1D1D6;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             resize: vertical;
             box-sizing: border-box;
+            background-color: #F8F9FA;
+            color: #1C1C1E;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+            display: none;
             /* iOS optimizations */
             -webkit-appearance: none;
             appearance: none;
         }
 
-        .comment-textarea:focus {
+        .custom-comment-input.show {
+            display: block;
+        }
+
+        .custom-comment-input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+            border-color: #007AFF;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
         }
 
         /* Room status buttons */
@@ -964,21 +1052,30 @@
             }
             
             .code-inspection-grid {
-                grid-template-columns: 1fr; /* Stack columns on small screens */
+                gap: 12px;
             }
-            .grid-header, .grid-cell {
-                text-align: left;
-                justify-content: flex-start;
+            
+            .grid-row {
+                padding: 14px;
             }
-            .grid-cell:nth-child(3n+1), .grid-cell:nth-child(3n+2), .grid-cell:nth-child(3n) {
-                background-color: #fdfdfd; /* Uniform background */
+            
+            .grid-cell.code-cell {
+                font-size: 17px;
             }
-            .status-button {
-                max-width: none;
+            
+            .controls-row {
+                gap: 8px;
             }
-            .status-options {
-                position: relative; /* Adjust for mobile */
-                width: 100%;
+            
+            .status-button,
+            .comment-textarea {
+                font-size: 15px;
+                height: 42px;
+                line-height: 42px;
+            }
+            
+            .control-label {
+                font-size: 10px;
             }
             .action-buttons {
                 flex-direction: column;
@@ -2315,24 +2412,39 @@ Room Codes (Room- Codes)
             codesForCurrentRoom.forEach((code) => {
                 const uniqueCodeId = `${currentRoomName}-${code}`;
 
+                // Create card-style row
                 const rowDiv = document.createElement('div');
                 rowDiv.className = 'grid-row';
 
-                // Code Cell
+                // Code Cell (displays at top of card)
                 const codeCell = document.createElement('div');
-                codeCell.className = 'grid-cell';
+                codeCell.className = 'grid-cell code-cell';
                 codeCell.textContent = code;
                 rowDiv.appendChild(codeCell);
 
-                // Status Button Cell
-                const statusCell = document.createElement('div');
-                statusCell.className = 'grid-cell';
+                // Controls Cell (contains side-by-side status and comment)
+                const controlsCell = document.createElement('div');
+                controlsCell.className = 'grid-cell controls-cell';
+
+                // Create controls row for side-by-side layout
+                const controlsRow = document.createElement('div');
+                controlsRow.className = 'controls-row';
+
+                // Status Control Wrapper
+                const statusWrapper = document.createElement('div');
+                statusWrapper.className = 'control-wrapper';
+                
+                const statusLabel = document.createElement('div');
+                statusLabel.className = 'control-label';
+                statusLabel.textContent = 'STATUS';
+                statusWrapper.appendChild(statusLabel);
+
                 const statusButton = document.createElement('button');
                 statusButton.className = 'status-button';
                 statusButton.textContent = 'Select Status';
                 statusButton.dataset.codeId = uniqueCodeId;
                 statusButton.addEventListener('click', toggleStatusOptions);
-                statusCell.appendChild(statusButton);
+                statusWrapper.appendChild(statusButton);
 
                 const statusOptionsDiv = document.createElement('div');
                 statusOptionsDiv.className = 'status-options';
@@ -2346,29 +2458,27 @@ Room Codes (Room- Codes)
                     optionDiv.addEventListener('click', selectCodeStatus);
                     statusOptionsDiv.appendChild(optionDiv);
                 });
-                statusCell.appendChild(statusOptionsDiv);
-                rowDiv.appendChild(statusCell);
+                statusWrapper.appendChild(statusOptionsDiv);
+                controlsRow.appendChild(statusWrapper);
 
-                // Enhanced Comment Cell with Predefined Choices
-                const commentCell = document.createElement('div');
-                commentCell.className = 'grid-cell';
+                // Comment Control Wrapper
+                const commentWrapper = document.createElement('div');
+                commentWrapper.className = 'control-wrapper';
                 
-                const commentSection = document.createElement('div');
-                commentSection.className = 'comment-section';
+                const commentLabel = document.createElement('div');
+                commentLabel.className = 'control-label';
+                commentLabel.textContent = 'COMMENT';
+                commentWrapper.appendChild(commentLabel);
 
                 // Create dropdown select element
                 const commentSelect = document.createElement('select');
                 commentSelect.className = 'comment-textarea';
                 commentSelect.dataset.codeId = uniqueCodeId;
-                commentSelect.style.minHeight = '38px';
-                commentSelect.style.cursor = 'pointer';
                 
                 // Add default option
                 const defaultOption = document.createElement('option');
                 defaultOption.value = '';
                 defaultOption.textContent = 'Select a comment...';
-                defaultOption.disabled = true;
-                defaultOption.selected = true;
                 commentSelect.appendChild(defaultOption);
                 
                 // Add comment choices as options
@@ -2379,17 +2489,55 @@ Room Codes (Room- Codes)
                     commentSelect.appendChild(option);
                 });
                 
+                // Add "Custom" option
+                const customOption = document.createElement('option');
+                customOption.value = '__custom__';
+                customOption.textContent = 'Custom (Enter manually)';
+                commentSelect.appendChild(customOption);
+                
                 commentSelect.addEventListener('change', function(event) {
                     const codeId = event.target.dataset.codeId;
                     const selectedValue = event.target.value;
-                    appState.codeSpecificComments[codeId] = selectedValue;
+                    const customInput = document.querySelector(`.custom-comment-input[data-code-id="${codeId}"]`);
+                    
+                    if (selectedValue === '__custom__') {
+                        // Show custom input field
+                        if (customInput) {
+                            customInput.classList.add('show');
+                            customInput.focus();
+                        }
+                    } else {
+                        // Hide custom input field and save selected value
+                        if (customInput) {
+                            customInput.classList.remove('show');
+                            customInput.value = '';
+                        }
+                        appState.codeSpecificComments[codeId] = selectedValue;
+                        saveDataToStorage();
+                    }
+                });
+                
+                commentWrapper.appendChild(commentSelect);
+                
+                // Create custom input field
+                const customInput = document.createElement('textarea');
+                customInput.className = 'custom-comment-input';
+                customInput.dataset.codeId = uniqueCodeId;
+                customInput.placeholder = 'Enter your custom comment here...';
+                customInput.rows = 2;
+                
+                customInput.addEventListener('input', function(event) {
+                    const codeId = event.target.dataset.codeId;
+                    const value = event.target.value;
+                    appState.codeSpecificComments[codeId] = value;
                     saveDataToStorage();
                 });
                 
-                commentSection.appendChild(commentSelect);
+                commentWrapper.appendChild(customInput);
+                controlsRow.appendChild(commentWrapper);
 
-                commentCell.appendChild(commentSection);
-                rowDiv.appendChild(commentCell);
+                controlsCell.appendChild(controlsRow);
+                rowDiv.appendChild(controlsCell);
 
                 checksContainer.appendChild(rowDiv);
             });
@@ -2588,12 +2736,30 @@ Room Codes (Room- Codes)
                     }
                 }
 
-                // Update comment textarea
-                const commentTextarea = document.querySelector(`.comment-textarea[data-code-id="${uniqueCodeId}"]`);
-                if (commentTextarea) {
-                    commentTextarea.value = comment;
-                    // Update choice button states
-                    updateCommentChoiceButtons(uniqueCodeId);
+                // Update comment dropdown and custom input
+                const commentSelect = document.querySelector(`.comment-textarea[data-code-id="${uniqueCodeId}"]`);
+                const customInput = document.querySelector(`.custom-comment-input[data-code-id="${uniqueCodeId}"]`);
+                
+                if (commentSelect && customInput) {
+                    // Check if the comment matches any predefined choice
+                    const matchingChoice = commentChoices.find(choice => choice === comment);
+                    
+                    if (matchingChoice) {
+                        // Set dropdown to the matching choice
+                        commentSelect.value = matchingChoice;
+                        customInput.classList.remove('show');
+                        customInput.value = '';
+                    } else if (comment) {
+                        // Set dropdown to "Custom" and show custom input with the value
+                        commentSelect.value = '__custom__';
+                        customInput.classList.add('show');
+                        customInput.value = comment;
+                    } else {
+                        // No comment selected
+                        commentSelect.value = '';
+                        customInput.classList.remove('show');
+                        customInput.value = '';
+                    }
                 }
             });
         }
