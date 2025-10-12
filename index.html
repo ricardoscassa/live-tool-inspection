@@ -192,11 +192,105 @@
         .button.success {
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
         }
+
+        .button.warning {
+            background: linear-gradient(135deg, #f0932b 0%, #e67e22 100%);
+        }
+
+        .button.warning:hover {
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(240, 147, 43, 0.4);
+        }
         
         .button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
+        }
+
+        /* PC-only Dropdown Editor Styles */
+        .dropdown-editor {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #e1e5e9;
+        }
+
+        .dropdown-editor h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .dropdown-editor-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .dropdown-editor-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+        }
+
+        .dropdown-editor-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .dropdown-editor-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+
+        .dropdown-editor-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .dropdown-editor-btn.remove {
+            background: #dc3545;
+            color: white;
+        }
+
+        .dropdown-editor-btn.remove:hover {
+            background: #c82333;
+        }
+
+        .dropdown-editor-btn.add {
+            background: #28a745;
+            color: white;
+            width: 100%;
+        }
+
+        .dropdown-editor-btn.add:hover {
+            background: #218838;
+        }
+
+        .pc-only {
+            display: none;
+        }
+
+        @media (min-width: 1025px) {
+            .pc-only {
+                display: block !important;
+            }
         }
         
         /* Sequential Check Page Styles */
@@ -419,7 +513,7 @@
         .room-select.no-access {
             background-color: #ffebee;
             border-color: #f44336;
-            color: #c62828;
+            color: #c82828;
         }
 
         .room-select.completed {
@@ -595,6 +689,33 @@
             flex-direction: column;
             min-width: 0;
         }
+
+        /* --- FIX alignment between Status and Comment dropdowns --- */
+        .controls-row {
+            align-items: flex-start; /* Make both top-aligned first */
+        }
+
+        .control-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        /* Ensure both dropdowns have identical height and top spacing */
+        .status-button,
+        .comment-textarea {
+            height: 44px;
+            line-height: 44px;
+            padding: 0 12px;
+            margin-top: 12px;
+            box-sizing: border-box;
+        }
+
+        /* Small tweak for Safari / Chrome pixel difference */
+        .comment-textarea {
+            margin-top: 4px; /* adjust +1 or -1px if still off */
+        }
+
 
         .control-label {
             font-size: 11px;
@@ -1296,6 +1417,12 @@
                             Room number with SE/ST/SV entries
                         </div>
                     </button>
+                    <button id="uploadJsonMainMenu" class="menu-button" style="background: linear-gradient(135deg, #f0932b 0%, #e67e22 100%); color: white;">
+                        Upload Inspection Data
+                        <div style="font-size: 0.9rem; font-weight: normal; margin-top: 5px; opacity: 0.8;">
+                            Load a previous .json file
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1317,15 +1444,13 @@
                 <div class="action-buttons">
                     <button id="startInspection" class="button">Start Inspection</button>
                     <button id="loadSavedData" class="button secondary">Load Saved Data</button>
-                    <button id="exportJsonData" class="button secondary">Download Data (JSON)</button>
-                    <button id="importJsonData" class="button secondary">Upload Data (JSON)</button>
                     <button id="resetApp" class="button danger">Reset Application</button>
                     <button id="backToMainMenu" class="button secondary">Back to Menu</button>
                 </div>
             </div>
         </div>
 
-        <!-- Code Input Page (New) -->
+        <!-- Code Input Page (Enhanced with Dropdown Editor) -->
         <div id="codeInputPage" class="page">
             <div class="card">
                 <div class="room-input-section">
@@ -1345,13 +1470,48 @@ Room Codes (Room- Codes)
                         Enter room codes with their associated codes. Use the format shown above. Each line can contain a room code followed by its associated codes, or just individual codes.
                     </div>
                 </div>
+
+                <!-- PC-only Dropdown Editor Section -->
+                <div class="dropdown-editor pc-only">
+                    <h3>Edit Status Dropdown Options (PC Only)</h3>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">
+                        Customize the status dropdown options that appear in the ECS Inspection. Changes will be saved and can be exported/imported.
+                    </p>
+                    <div class="dropdown-editor-list" id="dropdownEditorList">
+                        <!-- Dropdown options will be dynamically added here -->
+                    </div>
+                    <button id="addDropdownOption" class="dropdown-editor-btn add">+ Add New Option</button>
+                </div>
+
                 <div class="action-buttons">
                     <button id="startCodeInspection" class="button">Start Inspection</button>
                     <button id="loadSavedCodeData" class="button secondary">Load Saved Data</button>
-                    <button id="exportCodeJsonData" class="button secondary">Download Data (JSON)</button>
-                    <button id="importCodeJsonData" class="button secondary">Upload Data (JSON)</button>
                     <button id="resetCodeApp" class="button danger">Reset Application</button>
                     <button id="backToMainMenuFromCode" class="button secondary">Back to Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Room SE/ST/SV Input Page -->
+        <div id="roomSeStSvInputPage" class="page">
+            <div class="card">
+                <div class="room-input-section">
+                    <label for="roomNumbers">Enter Room Numbers:</label>
+                    <textarea
+                        id="roomNumbers"
+                        class="room-textarea"
+                        placeholder="Enter room numbers, one per line:
+..."
+                    ></textarea>
+                    <div class="help-text">
+                        Enter each room number on a separate line.
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button id="startSeStSvInspection" class="button">Start Inspection</button>
+                    <button id="loadSavedSeStSvData" class="button secondary">Load Saved Data</button>
+                    <button id="resetSeStSvApp" class="button danger">Reset Application</button>
+                    <button id="backToMainMenuFromSeStSv" class="button secondary">Back to Menu</button>
                 </div>
             </div>
         </div>
@@ -1385,6 +1545,7 @@ Room Codes (Room- Codes)
                 </div>
                 <div class="action-buttons">
                     <button id="exportExcel" class="button success">Export to CSV</button>
+                    <button id="downloadJsonCheckPage" class="button warning">Download Data (JSON)</button>
                     <button id="backToInput" class="button secondary">Back to Input</button>
                 </div>
             </div>
@@ -1424,42 +1585,17 @@ Room Codes (Room- Codes)
                 </div>
                 <div class="action-buttons">
                     <button id="exportCodeExcel" class="button success">Export to CSV</button>
+                     <button id="downloadJsonCodeCheckPage" class="button warning">Download Data (JSON)</button>
                     <button id="backToCodeInput" class="button secondary">Back to Input</button>
                 </div>
             </div>
         </div>
 
-        <!-- Room SE/ST/SV Input Page (New) -->
-        <div id="roomSeStSvInputPage" class="page">
-            <div class="card">
-                <div class="room-input-section">
-                    <label for="roomNumbers">Enter Room Numbers:</label>
-                    <textarea
-                        id="roomNumbers"
-                        class="room-textarea"
-                        placeholder="Enter room numbers, one per line:
-..."
-                    ></textarea>
-                    <div class="help-text">
-                        Enter each room number on a separate line. The first 6 characters will be used as prefix for SE/ST/SV codes. All rooms should have the same prefix format for consistency.
-                    </div>
-                </div>
-                <div class="action-buttons">
-                    <button id="startSeStSvInspection" class="button">Start SE/ST/SV Inspection</button>
-                    <button id="loadSavedSeStSvData" class="button secondary">Load Saved Data</button>
-                    <button id="exportSeStSvJsonData" class="button secondary">Download Data (JSON)</button>
-                    <button id="importSeStSvJsonData" class="button secondary">Upload Data (JSON)</button>
-                    <button id="resetSeStSvApp" class="button danger">Reset Application</button>
-                    <button id="backToMainMenuFromSeStSv" class="button secondary">Back to Menu</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Room SE/ST/SV Check Page (Enhanced) -->
+        <!-- Room SE/ST/SV Check Page -->
         <div id="roomSeStSvCheckPage" class="page">
             <div class="card">
-                <div class="room-header">
-                    <h2 id="currentSeStSvRoomTitle" class="room-title">Room: 1ABC0172BA</h2>
+                <div class="code-header">
+                    <h2 id="currentSeStSvRoomTitle" class="code-title">Room: 1001</h2>
                     <div id="seStSvRoomSelect" class="custom-dropdown">
                         <button class="custom-dropdown-button" type="button">
                             <span class="custom-dropdown-text">Select Room</span>
@@ -1471,14 +1607,13 @@ Room Codes (Room- Codes)
                         <button id="seStSvNoAccessBtn" class="status-btn no-access">No Access</button>
                         <button id="seStSvCompletedBtn" class="status-btn completed">Access</button>
                     </div>
-                    <div id="seStSvProgressInfo" class="progress-info">Room 1 of 3</div>
+                    <div id="seStSvProgressInfo" class="progress-info">Room 1 of 5</div>
                     <div class="progress-bar">
-                        <div id="seStSvProgressFill" class="progress-fill" style="width: 33%"></div>
+                        <div id="seStSvProgressFill" class="progress-fill" style="width: 20%"></div>
                     </div>
                 </div>
-                
-                <div id="seStSvContainer">
-                    <!-- SE Section -->
+
+                <div id="seStSvEntriesContainer">
                     <div class="se-st-sv-section">
                         <h3 style="color: #333; margin-bottom: 15px;">SE</h3>
                         <div class="textarea-wrapper">
@@ -1487,19 +1622,14 @@ Room Codes (Room- Codes)
                         </div>
                     </div>
 
-                    <!-- ST Section -->
                     <div class="se-st-sv-section">
                         <h3 style="color: #333; margin-bottom: 15px;">ST</h3>
                         <div class="textarea-wrapper">
-                            <textarea class="entry-textarea" id="stTextarea" placeholder="Enter ST codes, one per line. You can use:
-- Short codes with clamps: 1111-2 (4 digits code - qty of clamps)
-- Whole room numbers: 1ABC01ST0123 (complete room number)
-- Whole room numbers with clamps: 1ABC01ST0123-2 (complete room number - qty of clamps)"></textarea>
+                            <textarea class="entry-textarea" id="stTextarea" placeholder="Enter ST codes, one per line"></textarea>
                             <span class="code-count" id="stCount"></span>
                         </div>
                     </div>
 
-                    <!-- SV Section -->
                     <div class="se-st-sv-section">
                         <h3 style="color: #333; margin-bottom: 15px;">SV</h3>
                         <div class="textarea-wrapper">
@@ -1515,6 +1645,7 @@ Room Codes (Room- Codes)
                 </div>
                 <div class="action-buttons">
                     <button id="exportSeStSvCsv" class="button success">Export to CSV</button>
+                    <button id="downloadJsonSeStSvCheckPage" class="button warning">Download Data (JSON)</button>
                     <button id="backToSeStSvInput" class="button secondary">Back to Input</button>
                 </div>
             </div>
@@ -1590,7 +1721,8 @@ Room Codes (Room- Codes)
             codeSpecificComments: {},
             seStSvRooms: [],
             currentSeStSvRoomIndex: 0,
-            seStSvData: {}
+            seStSvData: {},
+            customStatusOptions: [] // New: Store custom dropdown options
         };
 
         // Predefined comment choices for ECS Inspection
@@ -1639,8 +1771,8 @@ Room Codes (Room- Codes)
             { group: 'Comments', questions: ['Comments'] }
         ];
 
-        // Status options for code inspection
-        const codeStatusOptions = [
+        // Default status options for code inspection
+        const defaultCodeStatusOptions = [
             'Available',
             'CBS Installation',
             'Clamps Not welded',
@@ -1660,6 +1792,14 @@ Room Codes (Room- Codes)
             'NDT Required On Supports'
         ];
 
+        // Get current status options (custom or default)
+        function getCodeStatusOptions() {
+            if (appState.customStatusOptions && appState.customStatusOptions.length > 0) {
+                return appState.customStatusOptions;
+            }
+            return defaultCodeStatusOptions;
+        }
+
         // DOM elements
         const roomListTextarea = document.getElementById('roomList');
         const codeListTextarea = document.getElementById('codeList');
@@ -1669,6 +1809,7 @@ Room Codes (Room- Codes)
         document.addEventListener('DOMContentLoaded', function() {
             loadDataFromStorage();
             setupEventListeners();
+            renderDropdownEditor(); // Initialize dropdown editor
             
             // Check if we're in inspection mode and show appropriate page
             if (appState.isInspectionMode) {
@@ -1683,28 +1824,23 @@ Room Codes (Room- Codes)
             document.getElementById('siteInspectionBtn').addEventListener('click', showRoomInputPage);
             document.getElementById('codeInspectionBtn').addEventListener('click', showCodeInputPage);
             document.getElementById('roomSeStSvInspectionBtn').addEventListener('click', showRoomSeStSvInputPage);
+            document.getElementById('uploadJsonMainMenu').addEventListener('click', () => showFileUploadModal());
 
             // Room input page buttons
             document.getElementById('startInspection').addEventListener('click', startInspection);
             document.getElementById('loadSavedData').addEventListener('click', loadSavedData);
-            document.getElementById('exportJsonData').addEventListener('click', downloadJsonData);
-            document.getElementById('importJsonData').addEventListener('click', () => showFileUploadModal('site'));
             document.getElementById('resetApp').addEventListener('click', () => showResetModal('site'));
             document.getElementById('backToMainMenu').addEventListener('click', showMainMenu);
 
             // Code input page buttons
             document.getElementById('startCodeInspection').addEventListener('click', startCodeInspection);
             document.getElementById('loadSavedCodeData').addEventListener('click', loadSavedData);
-            document.getElementById('exportCodeJsonData').addEventListener('click', downloadJsonData);
-            document.getElementById('importCodeJsonData').addEventListener('click', () => showFileUploadModal('code'));
             document.getElementById('resetCodeApp').addEventListener('click', () => showResetModal('code'));
             document.getElementById('backToMainMenuFromCode').addEventListener('click', showMainMenu);
 
             // SE/ST/SV input page buttons
             document.getElementById('startSeStSvInspection').addEventListener('click', startSeStSvInspection);
             document.getElementById('loadSavedSeStSvData').addEventListener('click', loadSavedData);
-            document.getElementById('exportSeStSvJsonData').addEventListener('click', downloadJsonData);
-            document.getElementById('importSeStSvJsonData').addEventListener('click', () => showFileUploadModal('seStSv'));
             document.getElementById('resetSeStSvApp').addEventListener('click', () => showResetModal('seStSv'));
             document.getElementById('backToMainMenuFromSeStSv').addEventListener('click', showMainMenu);
 
@@ -1712,18 +1848,21 @@ Room Codes (Room- Codes)
             document.getElementById('prevRoom').addEventListener('click', () => navigateRoom(-1));
             document.getElementById('nextRoom').addEventListener('click', () => navigateRoom(1));
             document.getElementById('exportExcel').addEventListener('click', exportToCsv);
+            document.getElementById('downloadJsonCheckPage').addEventListener('click', downloadJsonData);
             document.getElementById('backToInput').addEventListener('click', backToInput);
 
             // Code check page buttons
             document.getElementById('prevCodeRoom').addEventListener('click', () => navigateCodeRoom(-1));
             document.getElementById('nextCodeRoom').addEventListener('click', () => navigateCodeRoom(1));
             document.getElementById('exportCodeExcel').addEventListener('click', exportCodeToCsv);
+            document.getElementById('downloadJsonCodeCheckPage').addEventListener('click', downloadJsonData);
             document.getElementById('backToCodeInput').addEventListener('click', backToCodeInput);
 
             // SE/ST/SV check page buttons
             document.getElementById('prevSeStSvRoom').addEventListener('click', () => navigateSeStSvRoom(-1));
             document.getElementById('nextSeStSvRoom').addEventListener('click', () => navigateSeStSvRoom(1));
             document.getElementById('exportSeStSvCsv').addEventListener('click', exportSeStSvToCsv);
+            document.getElementById('downloadJsonSeStSvCheckPage').addEventListener('click', downloadJsonData);
             document.getElementById('backToSeStSvInput').addEventListener('click', backToSeStSvInput);
 
             // Room status buttons
@@ -1745,6 +1884,9 @@ Room Codes (Room- Codes)
             document.getElementById('uploadFile').addEventListener('click', uploadFile);
             document.getElementById('cancelUpload').addEventListener('click', hideFileUploadModal);
             document.getElementById('messageOk').addEventListener('click', hideMessageModal);
+
+            // Dropdown editor button
+            document.getElementById('addDropdownOption').addEventListener('click', addDropdownOption);
 
             // Custom dropdown setup
             setupCustomDropdown('roomSelect', (index) => {
@@ -1804,6 +1946,65 @@ Room Codes (Room- Codes)
             });
         }
 
+        // Dropdown Editor Functions
+        function renderDropdownEditor() {
+            const editorList = document.getElementById('dropdownEditorList');
+            editorList.innerHTML = '';
+
+            const options = getCodeStatusOptions();
+            options.forEach((option, index) => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-editor-item';
+                item.innerHTML = `
+                    <input type="text" class="dropdown-editor-input" value="${option}" data-index="${index}">
+                    <button class="dropdown-editor-btn remove" data-index="${index}">Remove</button>
+                `;
+                editorList.appendChild(item);
+            });
+
+            // Add event listeners
+            editorList.querySelectorAll('.dropdown-editor-input').forEach(input => {
+                input.addEventListener('input', updateDropdownOption);
+            });
+
+            editorList.querySelectorAll('.dropdown-editor-btn.remove').forEach(btn => {
+                btn.addEventListener('click', removeDropdownOption);
+            });
+        }
+
+        function addDropdownOption() {
+            if (!appState.customStatusOptions || appState.customStatusOptions.length === 0) {
+                appState.customStatusOptions = [...defaultCodeStatusOptions];
+            }
+            appState.customStatusOptions.push('New Option');
+            saveDataToStorage();
+            renderDropdownEditor();
+        }
+
+        function updateDropdownOption(event) {
+            const index = parseInt(event.target.dataset.index);
+            const value = event.target.value;
+            
+            if (!appState.customStatusOptions || appState.customStatusOptions.length === 0) {
+                appState.customStatusOptions = [...defaultCodeStatusOptions];
+            }
+            
+            appState.customStatusOptions[index] = value;
+            saveDataToStorage();
+        }
+
+        function removeDropdownOption(event) {
+            const index = parseInt(event.target.dataset.index);
+            
+            if (!appState.customStatusOptions || appState.customStatusOptions.length === 0) {
+                appState.customStatusOptions = [...defaultCodeStatusOptions];
+            }
+            
+            appState.customStatusOptions.splice(index, 1);
+            saveDataToStorage();
+            renderDropdownEditor();
+        }
+
         // Page navigation functions
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
@@ -1822,6 +2023,7 @@ Room Codes (Room- Codes)
 
         function showCodeInputPage() {
             showPage('codeInputPage');
+            renderDropdownEditor(); // Refresh dropdown editor when showing code input page
         }
 
         function showRoomSeStSvInputPage() {
@@ -1854,13 +2056,12 @@ Room Codes (Room- Codes)
         function setupCustomDropdown(dropdownId, onSelectCallback) {
             const dropdown = document.getElementById(dropdownId);
             const button = dropdown.querySelector('.custom-dropdown-button');
-            const options = dropdown.querySelector('.custom-dropdown-options');
-            const arrow = dropdown.querySelector('.custom-dropdown-arrow');
+            const optionsContainer = dropdown.querySelector('.custom-dropdown-options');
+            const textSpan = dropdown.querySelector('.custom-dropdown-text');
 
             button.addEventListener('click', function(e) {
                 e.stopPropagation();
-                e.preventDefault();
-                const isOpen = options.classList.contains('show');
+                const isOpen = optionsContainer.classList.contains('show');
                 
                 // Close all other dropdowns
                 document.querySelectorAll('.custom-dropdown-options').forEach(opt => {
@@ -1871,127 +2072,68 @@ Room Codes (Room- Codes)
                 });
 
                 if (!isOpen) {
-                    options.classList.add('show');
+                    optionsContainer.classList.add('show');
                     button.classList.add('open');
                 }
             });
 
             // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!dropdown.contains(e.target)) {
-                    options.classList.remove('show');
-                    button.classList.remove('open');
-                }
-            });
-
-            // Handle option selection with improved event handling
-            options.addEventListener('click', function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                
-                // Find the option element (might be the target or a parent)
-                let optionElement = e.target;
-                while (optionElement && !optionElement.classList.contains('custom-dropdown-option')) {
-                    optionElement = optionElement.parentElement;
-                    if (optionElement === options) {
-                        return; // Clicked on container, not an option
-                    }
-                }
-                
-                if (optionElement && optionElement.classList.contains('custom-dropdown-option')) {
-                    const index = parseInt(optionElement.dataset.index);
-                    if (!isNaN(index)) {
-                        options.classList.remove('show');
-                        button.classList.remove('open');
-                        onSelectCallback(index);
-                    }
-                }
+            document.addEventListener('click', function() {
+                optionsContainer.classList.remove('show');
+                button.classList.remove('open');
             });
         }
 
-        function updateCustomDropdownOptions(dropdownId, items, selectedIndex) {
+        function updateCustomDropdownOptions(dropdownId, options, selectedIndex) {
             const dropdown = document.getElementById(dropdownId);
-            const button = dropdown.querySelector('.custom-dropdown-button');
-            const textSpan = button.querySelector('.custom-dropdown-text');
-            const options = dropdown.querySelector('.custom-dropdown-options');
-
-            // Update button text
-            if (items.length > 0 && selectedIndex >= 0 && selectedIndex < items.length) {
-                textSpan.textContent = items[selectedIndex];
-            } else {
-                textSpan.textContent = 'Select Room';
-            }
-
-            // Update options
-            options.innerHTML = '';
-            items.forEach((item, index) => {
-                const option = document.createElement('div');
-                option.className = 'custom-dropdown-option';
-                option.dataset.index = index;
+            const optionsContainer = dropdown.querySelector('.custom-dropdown-options');
+            const textSpan = dropdown.querySelector('.custom-dropdown-text');
+            
+            optionsContainer.innerHTML = '';
+            
+            options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'custom-dropdown-option';
+                if (index === selectedIndex) {
+                    optionDiv.classList.add('selected');
+                }
                 
                 // Add status indicator
-                const indicator = document.createElement('div');
-                const status = getRoomStatus(item);
+                const status = getRoomStatus(option);
+                const indicator = document.createElement('span');
                 indicator.className = `status-symbol ${status}`;
-                option.appendChild(indicator);
+                optionDiv.appendChild(indicator);
                 
-                const text = document.createElement('span');
-                text.textContent = item;
-                option.appendChild(text);
+                const textNode = document.createTextNode(option);
+                optionDiv.appendChild(textNode);
                 
-                if (index === selectedIndex) {
-                    option.classList.add('selected');
-                }
+                optionDiv.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const callback = dropdown.dataset.callback;
+                    if (dropdownId === 'roomSelect') {
+                        appState.currentRoomIndex = index;
+                        updateCheckPage();
+                        updateCheckStates();
+                    } else if (dropdownId === 'codeRoomSelect') {
+                        appState.currentCodeRoomIndex = index;
+                        updateCodeCheckPage();
+                        generateCodeCheckItems();
+                        updateCodeCheckStates();
+                    } else if (dropdownId === 'seStSvRoomSelect') {
+                        appState.currentSeStSvRoomIndex = index;
+                        updateSeStSvPage();
+                        generateSeStSvEntries();
+                    }
+                    saveDataToStorage();
+                    optionsContainer.classList.remove('show');
+                    dropdown.querySelector('.custom-dropdown-button').classList.remove('open');
+                });
                 
-                options.appendChild(option);
+                optionsContainer.appendChild(optionDiv);
             });
-        }
-
-        // Room navigation functions
-        function navigateRoom(direction) {
-            const newIndex = appState.currentRoomIndex + direction;
             
-            if (newIndex >= 0 && newIndex < appState.rooms.length) {
-                appState.currentRoomIndex = newIndex;
-                updateCheckPage();
-                updateCheckStates();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                saveDataToStorage();
-            } else if (newIndex >= appState.rooms.length) {
-                // Completed all rooms
-                showCompletionPage();
-            }
-        }
-
-        function navigateCodeRoom(direction) {
-            const roomNames = Object.keys(appState.roomCodes);
-            const newIndex = appState.currentCodeRoomIndex + direction;
-            
-            if (newIndex >= 0 && newIndex < roomNames.length) {
-                appState.currentCodeRoomIndex = newIndex;
-                updateCodeCheckPage();
-                generateCodeCheckItems();
-                updateCodeCheckStates();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                saveDataToStorage();
-            } else if (newIndex >= roomNames.length) {
-                // Completed all rooms
-                showCompletionPage();
-            }
-        }
-
-        function navigateSeStSvRoom(direction) {
-            const newIndex = appState.currentSeStSvRoomIndex + direction;
-            
-            if (newIndex >= 0 && newIndex < appState.seStSvRooms.length) {
-                appState.currentSeStSvRoomIndex = newIndex;
-                updateSeStSvPage();
-                generateSeStSvEntries();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                saveDataToStorage();
-            } else if (newIndex >= appState.seStSvRooms.length) {
-                // Completed all rooms
-                showCompletionPage();
+            if (options.length > 0 && selectedIndex >= 0 && selectedIndex < options.length) {
+                textSpan.textContent = options[selectedIndex];
             }
         }
 
@@ -2395,48 +2537,49 @@ Room Codes (Room- Codes)
                 btn.addEventListener('click', handleCheckClick);
             });
 
-            document.querySelectorAll('#checksContainer textarea[data-check]').forEach(area => {
-                area.addEventListener('input', handleTextInput);
+            document.querySelectorAll('#checksContainer textarea[data-check]').forEach(textarea => {
+                textarea.addEventListener('input', handleTextInput);
             });
         }
 
-        // Generate check items for code inspection (Excel-like layout) with enhanced comment section
+        // Generate code check items for code inspection
         function generateCodeCheckItems() {
             const checksContainer = document.getElementById('codeChecksContainer');
-            // Clear only rows, keep headers
-            checksContainer.querySelectorAll('.grid-row').forEach(row => row.remove());
+            checksContainer.innerHTML = '';
 
             const currentRoomName = Object.keys(appState.roomCodes)[appState.currentCodeRoomIndex];
             const codesForCurrentRoom = appState.roomCodes[currentRoomName] || [];
 
-            codesForCurrentRoom.forEach((code) => {
-                const uniqueCodeId = `${currentRoomName}-${code}`;
+            const codeStatusOptions = getCodeStatusOptions(); // Use custom or default options
 
-                // Create card-style row
+            codesForCurrentRoom.forEach(code => {
+                const uniqueCodeId = `${currentRoomName}-${code}`;
+                
                 const rowDiv = document.createElement('div');
                 rowDiv.className = 'grid-row';
 
-                // Code Cell (displays at top of card)
+                // Code cell
                 const codeCell = document.createElement('div');
                 codeCell.className = 'grid-cell code-cell';
                 codeCell.textContent = code;
                 rowDiv.appendChild(codeCell);
 
-                // Controls Cell (contains side-by-side status and comment)
+                // Controls cell
                 const controlsCell = document.createElement('div');
                 controlsCell.className = 'grid-cell controls-cell';
 
-                // Create controls row for side-by-side layout
+                // Controls row
                 const controlsRow = document.createElement('div');
                 controlsRow.className = 'controls-row';
 
-                // Status Control Wrapper
+                // Status wrapper
                 const statusWrapper = document.createElement('div');
                 statusWrapper.className = 'control-wrapper';
+                statusWrapper.style.position = 'relative';
                 
                 const statusLabel = document.createElement('div');
                 statusLabel.className = 'control-label';
-                statusLabel.textContent = 'STATUS';
+                statusLabel.textContent = 'Status';
                 statusWrapper.appendChild(statusLabel);
 
                 const statusButton = document.createElement('button');
@@ -2446,31 +2589,33 @@ Room Codes (Room- Codes)
                 statusButton.addEventListener('click', toggleStatusOptions);
                 statusWrapper.appendChild(statusButton);
 
-                const statusOptionsDiv = document.createElement('div');
-                statusOptionsDiv.className = 'status-options';
-                statusOptionsDiv.dataset.codeId = uniqueCodeId;
-                codeStatusOptions.forEach((option, optionIndex) => {
-                    const optionDiv = document.createElement('div');
-                    optionDiv.className = 'status-option';
-                    optionDiv.textContent = option;
-                    optionDiv.dataset.codeId = uniqueCodeId;
-                    optionDiv.dataset.statusIndex = optionIndex;
-                    optionDiv.addEventListener('click', selectCodeStatus);
-                    statusOptionsDiv.appendChild(optionDiv);
+                const statusOptions = document.createElement('div');
+                statusOptions.className = 'status-options';
+                statusOptions.dataset.codeId = uniqueCodeId;
+                
+                codeStatusOptions.forEach((status, index) => {
+                    const option = document.createElement('div');
+                    option.className = 'status-option';
+                    option.textContent = status;
+                    option.dataset.codeId = uniqueCodeId;
+                    option.dataset.statusIndex = index;
+                    option.addEventListener('click', selectCodeStatus);
+                    statusOptions.appendChild(option);
                 });
-                statusWrapper.appendChild(statusOptionsDiv);
+                
+                statusWrapper.appendChild(statusOptions);
                 controlsRow.appendChild(statusWrapper);
 
-                // Comment Control Wrapper
+                // Comment wrapper
                 const commentWrapper = document.createElement('div');
-                commentWrapper.className = 'control-wrapper';
+                commentWrapper.className = 'control-wrapper comment-section';
                 
                 const commentLabel = document.createElement('div');
                 commentLabel.className = 'control-label';
-                commentLabel.textContent = 'COMMENT';
+                commentLabel.textContent = 'Comment';
                 commentWrapper.appendChild(commentLabel);
 
-                // Create dropdown select element
+                // Create dropdown for predefined choices
                 const commentSelect = document.createElement('select');
                 commentSelect.className = 'comment-textarea';
                 commentSelect.dataset.codeId = uniqueCodeId;
@@ -2478,11 +2623,11 @@ Room Codes (Room- Codes)
                 // Add default option
                 const defaultOption = document.createElement('option');
                 defaultOption.value = '';
-                defaultOption.textContent = 'Select a comment...';
+                defaultOption.textContent = 'Select comment...';
                 commentSelect.appendChild(defaultOption);
                 
-                // Add comment choices as options
-                commentChoices.forEach((choice) => {
+                // Add predefined choices
+                commentChoices.forEach(choice => {
                     const option = document.createElement('option');
                     option.value = choice;
                     option.textContent = choice;
@@ -2492,13 +2637,12 @@ Room Codes (Room- Codes)
                 // Add "Custom" option
                 const customOption = document.createElement('option');
                 customOption.value = '__custom__';
-                customOption.textContent = 'Custom (Enter manually)';
+                customOption.textContent = 'Custom...';
                 commentSelect.appendChild(customOption);
                 
                 commentSelect.addEventListener('change', function(event) {
                     const codeId = event.target.dataset.codeId;
                     const selectedValue = event.target.value;
-                    const customInput = document.querySelector(`.custom-comment-input[data-code-id="${codeId}"]`);
                     
                     if (selectedValue === '__custom__') {
                         // Show custom input field
@@ -2543,69 +2687,6 @@ Room Codes (Room- Codes)
             });
         }
 
-        // Handle predefined comment choice selection
-        function selectCommentChoice(event) {
-            event.preventDefault();
-            const codeId = event.target.dataset.codeId;
-            const choice = event.target.dataset.choice;
-            
-            // Find the textarea for this code
-            const textarea = document.querySelector(`.comment-textarea[data-code-id="${codeId}"]`);
-            if (textarea) {
-                // Check if choice is already in the textarea
-                const currentValue = textarea.value.trim();
-                const choices = currentValue.split('\n').map(line => line.trim()).filter(line => line);
-                
-                // Toggle the choice
-                const choiceIndex = choices.indexOf(choice);
-                if (choiceIndex > -1) {
-                    // Remove the choice
-                    choices.splice(choiceIndex, 1);
-                    event.target.classList.remove('selected');
-                } else {
-                    // Add the choice
-                    choices.push(choice);
-                    event.target.classList.add('selected');
-                }
-                
-                // Update textarea value
-                textarea.value = choices.join('\n');
-                
-                // Update app state
-                appState.codeSpecificComments[codeId] = textarea.value;
-                saveDataToStorage();
-            }
-            
-            // Update button visual state
-            updateCommentChoiceButtons(codeId);
-        }
-
-        // Update visual state of comment choice buttons
-        function updateCommentChoiceButtons(codeId) {
-            const textarea = document.querySelector(`.comment-textarea[data-code-id="${codeId}"]`);
-            const choiceButtons = document.querySelectorAll(`.comment-choice-btn[data-code-id="${codeId}"]`);
-            
-            if (textarea && choiceButtons.length > 0) {
-                const currentValue = textarea.value.trim();
-                const selectedChoices = currentValue.split('\n').map(line => line.trim()).filter(line => line);
-                
-                choiceButtons.forEach(btn => {
-                    const choice = btn.dataset.choice;
-                    if (selectedChoices.includes(choice)) {
-                        btn.classList.add('selected');
-                    } else {
-                        btn.classList.remove('selected');
-                    }
-                });
-            }
-        }
-
-        // Helper function to check if a code is a whole room number
-        function isWholeRoomNumber(code) {
-            // Check if the code contains 'SE', 'ST', or 'SV' which indicates it's a whole room number
-            return code.includes('SE') || code.includes('ST') || code.includes('SV');
-        }
-
         // Event handlers
         function handleCheckClick(event) {
             const checkIndex = parseInt(event.target.dataset.check);
@@ -2632,16 +2713,6 @@ Room Codes (Room- Codes)
             
             appState.checkData[currentRoom][checkIndex] = value;
             saveDataToStorage();
-        }
-
-        function handleCodeCommentInput(event) {
-            const codeId = event.target.dataset.codeId;
-            const value = event.target.value;
-            appState.codeSpecificComments[codeId] = value;
-            saveDataToStorage();
-            
-            // Update choice button states
-            updateCommentChoiceButtons(codeId);
         }
 
         function toggleStatusOptions(event) {
@@ -2718,6 +2789,7 @@ Room Codes (Room- Codes)
         function updateCodeCheckStates() {
             const currentRoomName = Object.keys(appState.roomCodes)[appState.currentCodeRoomIndex];
             const codesForCurrentRoom = appState.roomCodes[currentRoomName] || [];
+            const codeStatusOptions = getCodeStatusOptions();
 
             codesForCurrentRoom.forEach(code => {
                 const uniqueCodeId = `${currentRoomName}-${code}`;
@@ -2784,11 +2856,6 @@ Room Codes (Room- Codes)
             // Update room select color based on status
             updateSeStSvRoomSelectColor();
             
-            // Reset and update counters when room changes
-            if (typeof window.resetSeStSvCounters === 'function') {
-                window.resetSeStSvCounters();
-            }
-            
             // Update navigation buttons
             const prevBtn = document.getElementById('prevSeStSvRoom');
             const nextBtn = document.getElementById('nextSeStSvRoom');
@@ -2839,12 +2906,13 @@ Room Codes (Room- Codes)
             stTextarea.oninput = (e) => handleSeStSvTextareaInput("ST", e.target.value);
             svTextarea.oninput = (e) => handleSeStSvTextareaInput("SV", e.target.value);
 
-            // Update counters after loading data
-            setTimeout(() => {
-                if (typeof window.updateSeStSvCounters === 'function') {
-                    window.updateSeStSvCounters();
-                }
-            }, 100);
+            updateSeStSvCounters();
+        }
+
+        // Helper function to check if a code is a whole room number
+        function isWholeRoomNumber(code) {
+            // Check if the code contains 'SE', 'ST', or 'SV' which indicates it's a whole room number
+            return code.includes('SE') || code.includes('ST') || code.includes('SV');
         }
 
         // Enhanced handleSeStSvTextareaInput function to support whole room numbers
@@ -2861,114 +2929,138 @@ Room Codes (Room- Codes)
                     if (isWholeRoomNumber(entry)) {
                         // Handle whole room numbers (with or without clamps)
                         if (entry.includes('-')) {
-                            // Whole room number with clamps (e.g., "1ABC01ST0123-2")
-                            const [wholeCode, clampQty] = entry.split('-');
-                            stCodes.push(wholeCode.trim());
-                            clampQuantities.push(clampQty.trim());
+                            const parts = entry.split('-');
+                            const code = parts[0].trim();
+                            const clampQty = parts.slice(1).join('-').trim();
+                            stCodes.push(code);
+                            clampQuantities.push(clampQty);
                         } else {
-                            // Whole room number without clamps (e.g., "1ABC01ST0123")
                             stCodes.push(entry);
-                            clampQuantities.push(''); // No clamp quantity
+                            clampQuantities.push('');
                         }
-                    } else if (entry.includes('-')) {
-                        // Regular code with clamps (e.g., "1111-2")
-                        const [code, clampQty] = entry.split('-');
-                        stCodes.push(code.trim());
-                        clampQuantities.push(clampQty.trim());
                     } else {
-                        // Regular code without clamps (e.g., "1111")
-                        stCodes.push(entry);
-                        clampQuantities.push(''); // No clamp quantity
+                        // Handle individual codes (with or without clamps)
+                        if (entry.includes('-')) {
+                            const parts = entry.split('-');
+                            const code = parts[0].trim();
+                            const clampQty = parts.slice(1).join('-').trim();
+                            stCodes.push(code);
+                            clampQuantities.push(clampQty);
+                        } else {
+                            stCodes.push(entry);
+                            clampQuantities.push('');
+                        }
                     }
                 });
                 
-                appState.seStSvData[currentRoom]['ST'] = stCodes;
-                appState.seStSvData[currentRoom]['Clamps'] = clampQuantities;
+                appState.seStSvData[currentRoom]["ST"] = stCodes;
+                appState.seStSvData[currentRoom]["Clamps"] = clampQuantities;
             } else {
-                // For SE and SV, process normally
-                appState.seStSvData[currentRoom][type] = value.split("\n").map(code => code.trim()).filter(code => code);
+                // For SE and SV, just split by newlines
+                const entries = value.split("\n").map(line => line.trim()).filter(line => line);
+                appState.seStSvData[currentRoom][type] = entries;
             }
             
             saveDataToStorage();
+            updateSeStSvCounters();
         }
 
-        // Enhanced exportSeStSvToCsv function to handle whole room numbers
-        function exportSeStSvToCsv() {
-            try {
-                const headers = ['Room Number', 'SE', 'ST', 'Clamps', 'SV'];
-                const csvRows = [];
-                csvRows.push(headers.map(h => `"${String(h).replace(/"/g, '""')}"`).join(','));
+        function updateSeStSvCounters() {
+            const seTextarea = document.getElementById("seTextarea");
+            const stTextarea = document.getElementById("stTextarea");
+            const svTextarea = document.getElementById("svTextarea");
 
-                appState.seStSvRooms.forEach(room => {
-                    const roomPrefix = room.substring(0, 6);
-                    const roomData = appState.seStSvData[room];
+            const seCountSpan = document.getElementById("seCount");
+            const stCountSpan = document.getElementById("stCount");
+            const svCountSpan = document.getElementById("svCount");
 
-                    const seCodes = roomData['SE'].filter(code => code.trim()).map(code => `${roomPrefix}SE${code}`);
-                    
-                    // Enhanced ST code processing
-                    const stCodes = roomData['ST'].filter(code => code.trim()).map(code => {
-                        if (isWholeRoomNumber(code)) {
-                            // If it's a whole room number, use it as-is (no prefix needed)
-                            return code;
-                        } else {
-                            // If it's a regular code, add the room prefix
-                            return `${roomPrefix}ST${code}`;
-                        }
-                    });
-                    
-                    const svCodes = roomData['SV'].filter(code => code.trim()).map(code => `${roomPrefix}SV${code}`);
-                    const clampQuantities = roomData['Clamps'] || [];
+            const seLines = seTextarea.value.split('\n').filter(line => line.trim() !== '').length;
+            const stLines = stTextarea.value.split('\n').filter(line => line.trim() !== '').length;
+            const svLines = svTextarea.value.split('\n').filter(line => line.trim() !== '').length;
 
-                    const maxLength = Math.max(seCodes.length, stCodes.length, svCodes.length, clampQuantities.length);
+            if (seLines > 1) {
+                seCountSpan.textContent = seLines;
+                seCountSpan.style.display = 'block';
+            } else {
+                seCountSpan.style.display = 'none';
+            }
 
-                    for (let i = 0; i < maxLength; i++) {
-                        const row = [];
-                        if (i === 0) {
-                            row.push(room); // Room number only on the first row for this room
-                        } else {
-                            row.push(''); // Empty for subsequent rows of the same room
-                        }
-                        row.push(seCodes[i] || '');
-                        row.push(stCodes[i] || '');
-                        row.push(clampQuantities[i] || ''); // Clamp quantity
-                        row.push(svCodes[i] || '');
-                        csvRows.push(row.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','));
-                    }
-                    if (maxLength === 0) {
-                        // If no codes for the room, still add the room number row
-                        csvRows.push(`"${room}","","","",""`);
-                    }
-                });
+            if (stLines > 1) {
+                stCountSpan.textContent = stLines;
+                stCountSpan.style.display = 'block';
+            } else {
+                stCountSpan.style.display = 'none';
+            }
 
-                const csvContent = csvRows.join('\n');
-                const timestamp = new Date().toISOString().split('T')[0];
-                downloadCsvFile(csvContent, `room_se_st_sv_inspection_${timestamp}.csv`);
-            } catch (error) {
-                console.error('Export failed:', error);
-                showMessageModal('Export Failed', 'Failed to export data. Please try again.');
+            if (svLines > 1) {
+                svCountSpan.textContent = svLines;
+                svCountSpan.style.display = 'block';
+            } else {
+                svCountSpan.style.display = 'none';
+            }
+        }
+
+        // Navigation functions
+        function navigateRoom(direction) {
+            const newIndex = appState.currentRoomIndex + direction;
+            
+            if (newIndex >= 0 && newIndex < appState.rooms.length) {
+                appState.currentRoomIndex = newIndex;
+                updateCheckPage();
+                updateCheckStates();
+                saveDataToStorage();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (newIndex >= appState.rooms.length) {
+                showCompletionPage();
+            }
+        }
+
+        function navigateCodeRoom(direction) {
+            const roomNames = Object.keys(appState.roomCodes);
+            const newIndex = appState.currentCodeRoomIndex + direction;
+            
+            if (newIndex >= 0 && newIndex < roomNames.length) {
+                appState.currentCodeRoomIndex = newIndex;
+                updateCodeCheckPage();
+                generateCodeCheckItems();
+                updateCodeCheckStates();
+                saveDataToStorage();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (newIndex >= roomNames.length) {
+                showCompletionPage();
+            }
+        }
+
+        function navigateSeStSvRoom(direction) {
+            const newIndex = appState.currentSeStSvRoomIndex + direction;
+            
+            if (newIndex >= 0 && newIndex < appState.seStSvRooms.length) {
+                appState.currentSeStSvRoomIndex = newIndex;
+                updateSeStSvPage();
+                generateSeStSvEntries();
+                saveDataToStorage();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (newIndex >= appState.seStSvRooms.length) {
+                showCompletionPage();
             }
         }
 
         // Export functions
         function exportToCsv() {
             try {
-                const headers = ['Room', ...checkLabels];
-                const csvRows = [];
-                // Add headers, ensuring proper CSV escaping
-                csvRows.push(headers.map(h => `"${String(h).replace(/"/g, '""')}"`).join(','));
-
+                let csvContent = 'Room,';
+                csvContent += checkLabels.join(',') + '\n';
+                
                 appState.rooms.forEach(room => {
-                    const roomData = appState.checkData[room] || new Array(checkLabels.length).fill(null);
-                    const rowData = [room, ...roomData.map(value => {
-                        if (value === null) return ' ';
-                        if (typeof value === 'string') return value; // Comments are strings
-                        return value === 1 ? '1' : '0'; // Yes/No checks
-                    })];
-                    // Add data rows, ensuring proper CSV escaping
-                    csvRows.push(rowData.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','));
+                    csvContent += `"${room}",`;
+                    const roomData = appState.checkData[room] || new Array(checkLabels.length).fill('');
+                    csvContent += roomData.map(val => {
+                        if (val === null || val === undefined) return '';
+                        if (typeof val === 'string') return `"${val.replace(/"/g, '""')}"`;
+                        return val;
+                    }).join(',') + '\n';
                 });
-
-                const csvContent = csvRows.join('\n');
+                
                 downloadCsvFile(csvContent, `room_inspection_${new Date().toISOString().split('T')[0]}.csv`);
             } catch (error) {
                 console.error('Export failed:', error);
@@ -2978,27 +3070,52 @@ Room Codes (Room- Codes)
 
         function exportCodeToCsv() {
             try {
-                const headers = ['Room', 'Code', 'Status', 'Comment'];
-                const csvRows = [];
-                // Add headers, ensuring proper CSV escaping
-                csvRows.push(headers.map(h => `"${String(h).replace(/"/g, '""')}"`).join(','));
-
-                // Iterate through rooms, then their codes to get the room name for each code
-                for (const roomName in appState.roomCodes) {
-                    appState.roomCodes[roomName].forEach(code => {
-                        const uniqueCodeId = `${roomName}-${code}`;
+                const codeStatusOptions = getCodeStatusOptions();
+                let csvContent = 'Room,Code,Status,Comment\n';
+                
+                for (const room in appState.roomCodes) {
+                    appState.roomCodes[room].forEach(code => {
+                        const uniqueCodeId = `${room}-${code}`;
                         const statusIndex = appState.checkData[uniqueCodeId];
-                        const status = statusIndex !== null && statusIndex !== undefined ? codeStatusOptions[statusIndex] : '';
+                        const status = (statusIndex !== null && statusIndex !== undefined) ? codeStatusOptions[statusIndex] : '';
                         const comment = appState.codeSpecificComments[uniqueCodeId] || '';
                         
-                        const rowData = [roomName, code, status, comment];
-                        // Add data rows, ensuring proper CSV escaping
-                        csvRows.push(rowData.map(c => `"${String(c).replace(/"/g, '""')}"`).join(','));
+                        csvContent += `"${room}","${code}","${status}","${comment.replace(/"/g, '""')}"\n`;
                     });
                 }
-
-                const csvContent = csvRows.join('\n');
+                
                 downloadCsvFile(csvContent, `code_inspection_${new Date().toISOString().split('T')[0]}.csv`);
+            } catch (error) {
+                console.error('Export failed:', error);
+                showMessageModal('Export Failed', 'Failed to export data. Please try again.');
+            }
+        }
+
+        function exportSeStSvToCsv() {
+            try {
+                let csvContent = 'Room,SE,ST,SV\n';
+                
+                appState.seStSvRooms.forEach(room => {
+                    const data = appState.seStSvData[room];
+                    const maxLength = Math.max(
+                        data.SE.length,
+                        data.ST.length,
+                        data.SV.length
+                    );
+                    
+                    for (let i = 0; i < maxLength; i++) {
+                        const se = data.SE[i] || '';
+                        const st = data.ST[i] || '';
+                        const sv = data.SV[i] || '';
+                        const clamp = data.Clamps && data.Clamps[i] ? data.Clamps[i] : '';
+                        
+                        const stWithClamp = clamp ? `${st}-${clamp}` : st;
+                        
+                        csvContent += `"${i === 0 ? room : ''}","${se}","${stWithClamp}","${sv}"\n`;
+                    }
+                });
+                
+                downloadCsvFile(csvContent, `se_st_sv_inspection_${new Date().toISOString().split('T')[0]}.csv`);
             } catch (error) {
                 console.error('Export failed:', error);
                 showMessageModal('Export Failed', 'Failed to export data. Please try again.');
@@ -3058,9 +3175,8 @@ Room Codes (Room- Codes)
             showMessageModal('Reset Complete', 'Application has been reset successfully.');
         }
 
-        function showFileUploadModal(type) {
+        function showFileUploadModal() {
             document.getElementById('fileUploadModal').classList.add('active');
-            document.getElementById('fileUploadModal').dataset.type = type;
             document.getElementById('fileName').textContent = '';
             document.getElementById('jsonFileInput').value = '';
         }
@@ -3082,10 +3198,26 @@ Room Codes (Room- Codes)
             reader.onload = function(e) {
                 try {
                     const data = JSON.parse(e.target.result);
-                    appState = { ...appState, ...data };
+                    // Reset state before loading new data to ensure a clean slate
+                    appState = {
+                        rooms: [],
+                        currentRoomIndex: 0,
+                        checkData: {},
+                        roomStatus: {},
+                        isInspectionMode: false,
+                        roomCodes: {},
+                        currentCodeRoomIndex: 0,
+                        codeSpecificComments: {},
+                        seStSvRooms: [],
+                        currentSeStSvRoomIndex: 0,
+                        seStSvData: {},
+                        customStatusOptions: [],
+                        ...data
+                    };
                     saveDataToStorage();
                     hideFileUploadModal();
                     refreshUIFromState();
+                    renderDropdownEditor(); // Refresh dropdown editor after import
                     showMessageModal('Upload Successful', 'Data uploaded and loaded successfully!');
                 } catch (error) {
                     console.error('Upload failed:', error);
@@ -3107,3 +3239,4 @@ Room Codes (Room- Codes)
     </script>
 </body>
 </html>
+
