@@ -1483,6 +1483,19 @@ Room Codes (Room- Codes)
                     <button id="addDropdownOption" class="dropdown-editor-btn add">+ Add New Option</button>
                 </div>
 
+                <!-- New PC-only Dropdown Editor for Comments -->
+                <div id="commentDropdownEditor" class="dropdown-editor pc-only">
+                    <h3>Edit Comment Dropdown Options (PC Only)</h3>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">
+                        Customize the predefined comment options that appear in the ECS Inspection.
+                    </p>
+                    <div class="dropdown-editor-list" id="commentDropdownEditorList">
+                        <!-- Comment dropdown options will be dynamically added here -->
+                    </div>
+                    <button id="addCommentDropdownOption" class="dropdown-editor-btn add">+ Add New Comment Option</button>
+                </div>
+
+
                 <div class="action-buttons">
                     <button id="startCodeInspection" class="button">Start Inspection</button>
                     <button id="loadSavedCodeData" class="button secondary">Load Saved Data</button>
@@ -1722,11 +1735,12 @@ Room Codes (Room- Codes)
             seStSvRooms: [],
             currentSeStSvRoomIndex: 0,
             seStSvData: {},
-            customStatusOptions: [] // New: Store custom dropdown options
+            customStatusOptions: [],
+            customCommentOptions: []
         };
 
-        // Predefined comment choices for ECS Inspection
-        const commentChoices = [
+        // Default comment choices for ECS Inspection
+        const defaultCommentOptions = [
             "Previously Installed",
             "Can be Installed",
             "Issue with Install",
@@ -1800,6 +1814,14 @@ Room Codes (Room- Codes)
             return defaultCodeStatusOptions;
         }
 
+        // Get current comment options (custom or default)
+        function getCommentOptions() {
+            if (appState.customCommentOptions && appState.customCommentOptions.length > 0) {
+                return appState.customCommentOptions;
+            }
+            return defaultCommentOptions;
+        }
+
         // DOM elements
         const roomListTextarea = document.getElementById('roomList');
         const codeListTextarea = document.getElementById('codeList');
@@ -1809,7 +1831,8 @@ Room Codes (Room- Codes)
         document.addEventListener('DOMContentLoaded', function() {
             loadDataFromStorage();
             setupEventListeners();
-            renderDropdownEditor(); // Initialize dropdown editor
+            renderDropdownEditor(); // Initialize status dropdown editor
+            renderCommentDropdownEditor(); // Initialize comment dropdown editor
             
             // Check if we're in inspection mode and show appropriate page
             if (appState.isInspectionMode) {
@@ -1885,8 +1908,10 @@ Room Codes (Room- Codes)
             document.getElementById('cancelUpload').addEventListener('click', hideFileUploadModal);
             document.getElementById('messageOk').addEventListener('click', hideMessageModal);
 
-            // Dropdown editor button
+            // Dropdown editor buttons
             document.getElementById('addDropdownOption').addEventListener('click', addDropdownOption);
+            document.getElementById('addCommentDropdownOption').addEventListener('click', addCommentDropdownOption);
+
 
             // Custom dropdown setup
             setupCustomDropdown('roomSelect', (index) => {
@@ -2005,6 +2030,66 @@ Room Codes (Room- Codes)
             renderDropdownEditor();
         }
 
+        // Comment Dropdown Editor Functions
+        function renderCommentDropdownEditor() {
+            const editorList = document.getElementById('commentDropdownEditorList');
+            editorList.innerHTML = '';
+
+            const options = getCommentOptions();
+            options.forEach((option, index) => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-editor-item';
+                item.innerHTML = `
+                    <input type="text" class="dropdown-editor-input" value="${option}" data-index="${index}">
+                    <button class="dropdown-editor-btn remove-comment" data-index="${index}">Remove</button>
+                `;
+                editorList.appendChild(item);
+            });
+
+            // Add event listeners
+            editorList.querySelectorAll('.dropdown-editor-input').forEach(input => {
+                input.addEventListener('input', updateCommentDropdownOption);
+            });
+
+            editorList.querySelectorAll('.dropdown-editor-btn.remove-comment').forEach(btn => {
+                btn.addEventListener('click', removeCommentDropdownOption);
+            });
+        }
+
+        function addCommentDropdownOption() {
+            if (!appState.customCommentOptions || appState.customCommentOptions.length === 0) {
+                appState.customCommentOptions = [...defaultCommentOptions];
+            }
+            appState.customCommentOptions.push('New Comment');
+            saveDataToStorage();
+            renderCommentDropdownEditor();
+        }
+
+        function updateCommentDropdownOption(event) {
+            const index = parseInt(event.target.dataset.index);
+            const value = event.target.value;
+            
+            if (!appState.customCommentOptions || appState.customCommentOptions.length === 0) {
+                appState.customCommentOptions = [...defaultCommentOptions];
+            }
+            
+            appState.customCommentOptions[index] = value;
+            saveDataToStorage();
+        }
+
+        function removeCommentDropdownOption(event) {
+            const index = parseInt(event.target.dataset.index);
+            
+            if (!appState.customCommentOptions || appState.customCommentOptions.length === 0) {
+                appState.customCommentOptions = [...defaultCommentOptions];
+            }
+            
+            appState.customCommentOptions.splice(index, 1);
+            saveDataToStorage();
+            renderCommentDropdownEditor();
+        }
+
+
         // Page navigation functions
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
@@ -2023,7 +2108,8 @@ Room Codes (Room- Codes)
 
         function showCodeInputPage() {
             showPage('codeInputPage');
-            renderDropdownEditor(); // Refresh dropdown editor when showing code input page
+            renderDropdownEditor(); // Refresh status dropdown editor
+            renderCommentDropdownEditor(); // Refresh comment dropdown editor
         }
 
         function showRoomSeStSvInputPage() {
@@ -2550,7 +2636,8 @@ Room Codes (Room- Codes)
             const currentRoomName = Object.keys(appState.roomCodes)[appState.currentCodeRoomIndex];
             const codesForCurrentRoom = appState.roomCodes[currentRoomName] || [];
 
-            const codeStatusOptions = getCodeStatusOptions(); // Use custom or default options
+            const codeStatusOptions = getCodeStatusOptions();
+            const commentOptions = getCommentOptions();
 
             codesForCurrentRoom.forEach(code => {
                 const uniqueCodeId = `${currentRoomName}-${code}`;
@@ -2627,7 +2714,7 @@ Room Codes (Room- Codes)
                 commentSelect.appendChild(defaultOption);
                 
                 // Add predefined choices
-                commentChoices.forEach(choice => {
+                commentOptions.forEach(choice => {
                     const option = document.createElement('option');
                     option.value = choice;
                     option.textContent = choice;
@@ -2790,6 +2877,8 @@ Room Codes (Room- Codes)
             const currentRoomName = Object.keys(appState.roomCodes)[appState.currentCodeRoomIndex];
             const codesForCurrentRoom = appState.roomCodes[currentRoomName] || [];
             const codeStatusOptions = getCodeStatusOptions();
+            const commentOptions = getCommentOptions();
+
 
             codesForCurrentRoom.forEach(code => {
                 const uniqueCodeId = `${currentRoomName}-${code}`;
@@ -2814,7 +2903,7 @@ Room Codes (Room- Codes)
                 
                 if (commentSelect && customInput) {
                     // Check if the comment matches any predefined choice
-                    const matchingChoice = commentChoices.find(choice => choice === comment);
+                    const matchingChoice = commentOptions.find(choice => choice === comment);
                     
                     if (matchingChoice) {
                         // Set dropdown to the matching choice
@@ -2905,7 +2994,7 @@ Room Codes (Room- Codes)
             seTextarea.oninput = (e) => handleSeStSvTextareaInput("SE", e.target.value);
             stTextarea.oninput = (e) => handleSeStSvTextareaInput("ST", e.target.value);
             svTextarea.oninput = (e) => handleSeStSvTextareaInput("SV", e.target.value);
-
+            
             updateSeStSvCounters();
         }
 
@@ -2915,50 +3004,26 @@ Room Codes (Room- Codes)
             return code.includes('SE') || code.includes('ST') || code.includes('SV');
         }
 
-        // Enhanced handleSeStSvTextareaInput function to support whole room numbers
         function handleSeStSvTextareaInput(type, value) {
             const currentRoom = appState.seStSvRooms[appState.currentSeStSvRoomIndex];
             
             if (type === 'ST') {
-                // Parse ST codes and clamp quantities with enhanced logic for whole room numbers
                 const stEntries = value.split("\n").map(line => line.trim()).filter(line => line);
                 const stCodes = [];
                 const clampQuantities = [];
                 
                 stEntries.forEach(entry => {
-                    if (isWholeRoomNumber(entry)) {
-                        // Handle whole room numbers (with or without clamps)
-                        if (entry.includes('-')) {
-                            const parts = entry.split('-');
-                            const code = parts[0].trim();
-                            const clampQty = parts.slice(1).join('-').trim();
-                            stCodes.push(code);
-                            clampQuantities.push(clampQty);
-                        } else {
-                            stCodes.push(entry);
-                            clampQuantities.push('');
-                        }
-                    } else {
-                        // Handle individual codes (with or without clamps)
-                        if (entry.includes('-')) {
-                            const parts = entry.split('-');
-                            const code = parts[0].trim();
-                            const clampQty = parts.slice(1).join('-').trim();
-                            stCodes.push(code);
-                            clampQuantities.push(clampQty);
-                        } else {
-                            stCodes.push(entry);
-                            clampQuantities.push('');
-                        }
-                    }
+                    const parts = entry.split('-');
+                    const code = parts[0].trim();
+                    const clampQty = parts.length > 1 ? parts.slice(1).join('-').trim() : '';
+                    stCodes.push(code);
+                    clampQuantities.push(clampQty);
                 });
                 
                 appState.seStSvData[currentRoom]["ST"] = stCodes;
                 appState.seStSvData[currentRoom]["Clamps"] = clampQuantities;
             } else {
-                // For SE and SV, just split by newlines
-                const entries = value.split("\n").map(line => line.trim()).filter(line => line);
-                appState.seStSvData[currentRoom][type] = entries;
+                appState.seStSvData[currentRoom][type] = value.split("\n").map(line => line.trim()).filter(line => line);
             }
             
             saveDataToStorage();
@@ -2978,27 +3043,15 @@ Room Codes (Room- Codes)
             const stLines = stTextarea.value.split('\n').filter(line => line.trim() !== '').length;
             const svLines = svTextarea.value.split('\n').filter(line => line.trim() !== '').length;
 
-            if (seLines > 1) {
-                seCountSpan.textContent = seLines;
-                seCountSpan.style.display = 'block';
-            } else {
-                seCountSpan.style.display = 'none';
-            }
+            seCountSpan.textContent = seLines;
+            stCountSpan.textContent = stLines;
+            svCountSpan.textContent = svLines;
 
-            if (stLines > 1) {
-                stCountSpan.textContent = stLines;
-                stCountSpan.style.display = 'block';
-            } else {
-                stCountSpan.style.display = 'none';
-            }
-
-            if (svLines > 1) {
-                svCountSpan.textContent = svLines;
-                svCountSpan.style.display = 'block';
-            } else {
-                svCountSpan.style.display = 'none';
-            }
+            seCountSpan.style.display = seLines > 1 ? 'block' : 'none';
+            stCountSpan.style.display = stLines > 1 ? 'block' : 'none';
+            svCountSpan.style.display = svLines > 1 ? 'block' : 'none';
         }
+
 
         // Navigation functions
         function navigateRoom(direction) {
@@ -3212,12 +3265,14 @@ Room Codes (Room- Codes)
                         currentSeStSvRoomIndex: 0,
                         seStSvData: {},
                         customStatusOptions: [],
+                        customCommentOptions: [],
                         ...data
                     };
                     saveDataToStorage();
                     hideFileUploadModal();
                     refreshUIFromState();
-                    renderDropdownEditor(); // Refresh dropdown editor after import
+                    renderDropdownEditor(); // Refresh status dropdown editor after import
+                    renderCommentDropdownEditor(); // Refresh comment dropdown editor after import
                     showMessageModal('Upload Successful', 'Data uploaded and loaded successfully!');
                 } catch (error) {
                     console.error('Upload failed:', error);
@@ -3239,4 +3294,3 @@ Room Codes (Room- Codes)
     </script>
 </body>
 </html>
-
